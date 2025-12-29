@@ -130,6 +130,15 @@ export default async function ViewPage({ params }: Props) {
                             <p className="text-xs font-mono mb-4 text-gray-400">
                                 This file is cryptographically indexed for P2P distribution. If this site is seized, use this magnet to recover the data.
                             </p>
+
+                            <details className="mb-4 group">
+                                <summary className="text-[10px] font-bold uppercase tracking-widest cursor-pointer list-none flex items-center gap-1 text-yellow-400 hover:text-yellow-300">
+                                    <span>[?]</span> What is P2P?
+                                </summary>
+                                <div className="mt-2 text-[10px] leading-relaxed text-gray-400 border-l border-gray-700 pl-3 py-1 italic">
+                                    Think of this link like a "digital fingerprint" for the file. Usually, you get files from one store (this website). If the store closes, the file is gone. But with this "fingerprint," you can find the file by asking other people who already have it. It makes the evidence "seizure-proof."
+                                </div>
+                            </details>
                             <a href={data.magnet_uri} className="block bg-yellow-400 text-black border-2 border-black p-3 text-center font-black uppercase tracking-tighter hover:bg-yellow-300 active:translate-y-1 transition-all">
                                 Copy Magnet URI
                             </a>

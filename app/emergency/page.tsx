@@ -18,6 +18,17 @@ export default function EmergencyPage() {
             <section className="space-y-6">
                 <h2 className="text-2xl font-black uppercase border-b-4 border-black pb-2">2. Data Recovery (P2P)</h2>
                 <p>Every file uploaded to this platform is cryptographically indexed. You do not need this website to recover the data.</p>
+
+                <div className="bg-blue-50 border-2 border-black p-4 text-sm font-medium">
+                    <p className="font-bold uppercase text-xs mb-1">How P2P Recovery Works (For Non-Techies):</p>
+                    <p>
+                        Think of a <strong>Magnet Link</strong> like a "digital fingerprint" for the file.
+                        Usually, you get files from one store (this website). If the shop is shut down, the file is gone.
+                        But with this "fingerprint," you can find the file by asking other people who already have it.
+                        This makes the evidence <strong>seizure-proof</strong> because it doesn't live on just one computer.
+                    </p>
+                </div>
+
                 <div className="border-2 border-black p-6 bg-yellow-50">
                     <h3 className="font-bold uppercase mb-2">Database Torrent</h3>
                     <p className="text-sm mb-4">A JSON export of all submission metadata and magnet links is generated weekly.</p>

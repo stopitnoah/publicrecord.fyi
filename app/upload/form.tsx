@@ -28,12 +28,70 @@ export default function UploadForm() {
         }
     }, [state]);
 
+    const [category, setCategory] = useState<string>('general');
+
     const onCaptchaChange = (token: string) => {
         setCaptchaToken(token);
     };
 
     return (
         <form action={formAction} className="space-y-6 border-2 border-black p-6 brutal-shadow bg-white">
+
+            {/* Category Selector */}
+            <div className="space-y-3">
+                <label className="block text-sm font-bold uppercase mb-1">Submission Category</label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                    {[
+                        { value: 'alpr_camera', label: 'ALPR Camera Location' },
+                        { value: 'policy', label: 'Contracts & Policies' },
+                        { value: 'violation', label: 'Policy Violations' },
+                        { value: 'other', label: 'Other Records' },
+                    ].map((cat) => (
+                        <label
+                            key={cat.value}
+                            className={`border-2 border-black p-2 text-center cursor-pointer text-xs font-bold uppercase transition-colors ${category === cat.value ? 'bg-black text-white' : 'bg-white hover:bg-gray-100'}`}
+                        >
+                            <input
+                                type="radio"
+                                name="category"
+                                value={cat.value}
+                                checked={category === cat.value}
+                                onChange={() => setCategory(cat.value)}
+                                className="sr-only"
+                            />
+                            {cat.label}
+                        </label>
+                    ))}
+                    <label
+                        className={`border-2 border-black p-2 text-center cursor-pointer text-xs font-bold uppercase transition-colors col-span-2 md:col-span-3 ${category === 'tracking' ? 'bg-red-600 text-white border-red-600' : 'bg-red-50 hover:bg-red-100 text-red-800'}`}
+                    >
+                        <input
+                            type="radio"
+                            name="category"
+                            value="tracking"
+                            checked={category === 'tracking'}
+                            onChange={() => setCategory('tracking')}
+                            className="sr-only"
+                        />
+                        🔥 Public Official Tracking (Only for the Bold)
+                    </label>
+                </div>
+            </div>
+
+            {/* Only for the Bold Warning */}
+            {category === 'tracking' && (
+                <div className="bg-red-100 border-2 border-red-500 p-4 space-y-2">
+                    <p className="font-bold text-red-800 uppercase text-sm">⚠️ Only For The Bold</p>
+                    <p className="text-sm text-red-700">
+                        "Use your state's open records law to request the flock vehicle tracking
+                        data on your public officials... especially the ones that have supported
+                        spending your dollars building the surveillance state infrastructure."
+                    </p>
+                    <p className="text-xs text-red-600 italic">— Dr. John Padfield</p>
+                    <p className="text-xs font-bold mt-2">This is 100% legal but may attract attention.</p>
+                </div>
+            )}
+
 
             <div>
                 <label htmlFor="official_name" className="block text-sm font-bold uppercase mb-1">Official Name (Department/Agency)</label>

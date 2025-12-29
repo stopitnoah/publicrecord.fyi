@@ -24,6 +24,7 @@ export interface Database {
                     view_count: number
                     created_at: string
                     client_fingerprint: string | null
+                    category: string
                 }
                 Insert: {
                     id?: string
@@ -39,6 +40,7 @@ export interface Database {
                     view_count?: number
                     created_at?: string
                     client_fingerprint?: string | null
+                    category?: string
                 }
                 Update: {
                     id?: string
@@ -54,6 +56,7 @@ export interface Database {
                     view_count?: number
                     created_at?: string
                     client_fingerprint?: string | null
+                    category?: string
                 }
             }
             votes: {

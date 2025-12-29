@@ -21,6 +21,7 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const state = formData.get('state') as string;
     const date = formData.get('date') as string;
     const description = formData.get('description') as string;
+    const category = formData.get('category') as string || 'general';
     const captchaToken = formData.get('h-captcha-response') as string;
 
     // 1. Validate Captcha
@@ -99,7 +100,8 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
             description,
             file_url: publicUrl,
             file_type: file.type,
-            client_fingerprint: fingerprint
+            client_fingerprint: fingerprint,
+            category: category
         })
         .select()
         .single();

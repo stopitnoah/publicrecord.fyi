@@ -23,12 +23,13 @@ export default function RootLayout({
         className={`${inter.variable} min-h-screen flex flex-col`}
       >
         <header className="border-b-2 border-black p-4 flex justify-between items-center bg-white sticky top-0 z-50">
-           <h1 className="text-xl font-black tracking-tighter uppercase">publicrecord.fyi</h1>
-           <nav className="flex gap-4 text-sm font-bold">
-             <a href="/" className="hover:underline">Feed</a>
-             <a href="/upload" className="hover:underline">Upload</a>
-             <a href="/about" className="hover:underline">About</a>
-           </nav>
+          <h1 className="text-xl font-black tracking-tighter uppercase">publicrecord.fyi</h1>
+          <nav className="flex gap-4 text-sm font-bold">
+            <a href="/" className="hover:underline">Feed</a>
+            <a href="/upload" className="hover:underline">Upload</a>
+            <a href="/resources" className="hover:underline">Resources</a>
+            <a href="/about" className="hover:underline">About</a>
+          </nav>
         </header>
         <main className="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8">
           {children}

@@ -3,6 +3,7 @@
 import { supabase } from '@/lib/supabase';
 import { getFingerprint } from '@/lib/fingerprint';
 import { redirect } from 'next/navigation';
+import crypto from 'crypto';
 
 const MAX_SIZE = 50 * 1024 * 1024; // 50MB
 const ALLOWED_TYPES = ['application/pdf', 'image/png', 'image/jpeg', 'text/csv'];
@@ -78,6 +79,17 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     // Sanitize filename
     const safeName = Math.random().toString(36).substring(2, 15) + '_' + Date.now() + '.' + fileExt;
 
+    // Generate Magnet Link
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const hash = crypto.createHash('sha1').update(buffer).digest('hex');
+    const trackers = [
+        'udp://tracker.opentrackr.org:1337/announce',
+        'udp://tracker.openbittorrent.com:6969/announce',
+        'wss://tracker.openwebtorrent.com'
+    ].map(t => `&tr=${encodeURIComponent(t)}`).join('');
+    const magnetUri = `magnet:?xt=urn:btih:${hash}&dn=${encodeURIComponent(file.name)}${trackers}`;
+
     const { data: uploadData, error: uploadError } = await supabase.storage
         .from('submissions')
         .upload(safeName, file);
@@ -101,7 +113,8 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
             file_url: publicUrl,
             file_type: file.type,
             client_fingerprint: fingerprint,
-            category: category
+            category: category,
+            magnet_uri: magnetUri
         })
         .select()
         .single();

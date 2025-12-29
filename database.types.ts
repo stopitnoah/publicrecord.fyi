@@ -25,6 +25,7 @@ export interface Database {
                     created_at: string
                     client_fingerprint: string | null
                     category: string
+                    magnet_uri: string | null
                 }
                 Insert: {
                     id?: string
@@ -41,6 +42,7 @@ export interface Database {
                     created_at?: string
                     client_fingerprint?: string | null
                     category?: string
+                    magnet_uri?: string | null
                 }
                 Update: {
                     id?: string
@@ -57,6 +59,7 @@ export interface Database {
                     created_at?: string
                     client_fingerprint?: string | null
                     category?: string
+                    magnet_uri?: string | null
                 }
             }
             votes: {

@@ -1,13 +1,39 @@
 'use server'
 import { supabase } from '@/lib/supabase';
 
-export async function fetchSubmissions(offset: number, limit: number = 20) {
+export async function fetchSubmissions(
+    offset: number,
+    limit: number = 20,
+    search?: string,
+    state?: string,
+    category?: string,
+    sort: 'newest' | 'top' = 'newest'
+) {
     try {
-        const { data, error } = await supabase
+        let query = supabase
             .from('submissions')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .range(offset, offset + limit - 1);
+            .select('*');
+
+        if (state && state !== '') {
+            query = query.eq('state', state);
+        }
+
+        if (category && category !== '') {
+            query = query.eq('category', category);
+        }
+
+        if (search && search !== '') {
+            query = query.or(`official_name.ilike.%${search}%,title.ilike.%${search}%,description.ilike.%${search}%`);
+        }
+
+        if (sort === 'top') {
+            query = query.order('vote_count', { ascending: false });
+        }
+
+        // Always order by created_at as secondary or primary
+        query = query.order('created_at', { ascending: false });
+
+        const { data, error } = await query.range(offset, offset + limit - 1);
 
         if (error) {
             console.error(error);

@@ -2,6 +2,7 @@ import { supabase } from '@/lib/supabase';
 import { notFound } from 'next/navigation';
 import Papa from 'papaparse';
 import VoteButton from '@/app/components/vote-button';
+import ReportButton from '@/app/components/report-button';
 
 export const revalidate = 60;
 
@@ -17,6 +18,13 @@ export default async function ViewPage({ params }: Props) {
         .select('*')
         .eq('id', id)
         .single();
+
+    // Increment view count (fire and forget)
+    if (data) {
+        supabase.rpc('increment_view_count', { row_id: id }).then(({ error }) => {
+            if (error) console.error('View count increment failed', error);
+        });
+    }
 
     if (error || !data) {
         notFound();
@@ -116,14 +124,38 @@ export default async function ViewPage({ params }: Props) {
                         </p>
                     </div>
 
+                    {data.magnet_uri && (
+                        <div className="bg-black text-white p-6 relative brutal-shadow">
+                            <div className="absolute -top-3 left-4 bg-white text-black border-2 border-black px-2 text-xs font-bold uppercase">P2P Failsafe</div>
+                            <p className="text-xs font-mono mb-4 text-gray-400">
+                                This file is cryptographically indexed for P2P distribution. If this site is seized, use this magnet to recover the data.
+                            </p>
+                            <a href={data.magnet_uri} className="block bg-yellow-400 text-black border-2 border-black p-3 text-center font-black uppercase tracking-tighter hover:bg-yellow-300 active:translate-y-1 transition-all">
+                                Copy Magnet URI
+                            </a>
+                            <div className="mt-4 p-2 border border-gray-700 bg-gray-900 overflow-hidden">
+                                <p className="text-[10px] font-mono break-all text-gray-500 select-all">
+                                    {data.magnet_uri}
+                                </p>
+                            </div>
+                        </div>
+                    )}
+
                     <div className="font-mono text-xs text-gray-500 border-t-2 border-dotted border-black pt-4">
                         <div className="flex justify-between">
                             <span>ID:</span>
                             <span className="font-bold shrink-0 ml-4 truncate max-w-[150px]">{data.id}</span>
                         </div>
-                        <div className="flex justify-between mt-1">
-                            <span>Added:</span>
-                            <span className="font-bold">{new Date(data.created_at).toLocaleString()}</span>
+                        <div className="flex justify-between items-center mt-2 pt-2 border-t border-gray-100">
+                            <span>Jurisdiction:</span>
+                            <span className="font-bold">{data.state}</span>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                            <span>Views:</span>
+                            <span className="font-bold">{data.view_count || 0}</span>
+                        </div>
+                        <div className="mt-4 flex justify-end">
+                            <ReportButton id={data.id} />
                         </div>
                     </div>
                 </div>

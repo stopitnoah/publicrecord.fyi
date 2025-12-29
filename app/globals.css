@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter);
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #000000;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@layer utilities {
+  .brutal-border {
+    border: 2px solid black;
+  }
+  
+  .brutal-shadow {
+    box-shadow: 4px 4px 0px 0px #000000;
+  }
+
+  .brutal-btn {
+    @apply px-4 py-2 bg-white text-black border-2 border-black font-bold transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-gray-50;
+    box-shadow: 4px 4px 0px 0px #000000;
+  }
+}

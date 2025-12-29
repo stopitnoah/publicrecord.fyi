@@ -1,0 +1,32 @@
+app/actions/submit-record.ts(94,10): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "submissions", never, "POST">', gave the following error.
+    Argument of type '{ official_name: string; title: string; state: string; date: string; description: string; file_url: string; file_type: string; client_fingerprint: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "submissions", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'official_name' does not exist in type 'never[]'.
+app/actions/submit-record.ts(113,34): error TS2339: Property 'id' does not exist on type 'never'.
+app/actions/vote.ts(11,61): error TS2345: Argument of type '{ sub_id: string; fp: string; }' is not assignable to parameter of type 'undefined'.
+app/actions/vote.ts(23,18): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(values: never, options?: { count?: "exact" | "planned" | "estimated" | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "votes", never, "POST">', gave the following error.
+    Argument of type '{ submission_id: string; client_fingerprint: string; }' is not assignable to parameter of type 'never'.
+  Overload 2 of 2, '(values: never[], options?: { count?: "exact" | "planned" | "estimated" | undefined; defaultToNull?: boolean | undefined; } | undefined): PostgrestFilterBuilder<{ PostgrestVersion: "12"; }, never, never, null, "votes", never, "POST">', gave the following error.
+    Object literal may only specify known properties, and 'submission_id' does not exist in type 'never[]'.
+app/actions/vote.ts(28,60): error TS2345: Argument of type '{ row_id: string; }' is not assignable to parameter of type 'undefined'.
+app/view/[id]/page.tsx(26,14): error TS2339: Property 'file_type' does not exist on type 'never'.
+app/view/[id]/page.tsx(28,42): error TS2339: Property 'file_url' does not exist on type 'never'.
+app/view/[id]/page.tsx(42,116): error TS2339: Property 'title' does not exist on type 'never'.
+app/view/[id]/page.tsx(45,122): error TS2339: Property 'state' does not exist on type 'never'.
+app/view/[id]/page.tsx(46,93): error TS2339: Property 'official_name' does not exist on type 'never'.
+app/view/[id]/page.tsx(48,113): error TS2339: Property 'date' does not exist on type 'never'.
+app/view/[id]/page.tsx(56,31): error TS2339: Property 'file_type' does not exist on type 'never'.
+app/view/[id]/page.tsx(58,48): error TS2339: Property 'file_url' does not exist on type 'never'.
+app/view/[id]/page.tsx(58,68): error TS2339: Property 'title' does not exist on type 'never'.
+app/view/[id]/page.tsx(61,31): error TS2339: Property 'file_type' does not exist on type 'never'.
+app/view/[id]/page.tsx(62,47): error TS2339: Property 'file_url' does not exist on type 'never'.
+app/view/[id]/page.tsx(64,31): error TS2339: Property 'file_type' does not exist on type 'never'.
+app/view/[id]/page.tsx(92,39): error TS2339: Property 'file_url' does not exist on type 'never'.
+app/view/[id]/page.tsx(94,65): error TS2339: Property 'file_type' does not exist on type 'never'.
+app/view/[id]/page.tsx(105,50): error TS2339: Property 'id' does not exist on type 'never'.
+app/view/[id]/page.tsx(105,73): error TS2339: Property 'vote_count' does not exist on type 'never'.
+app/view/[id]/page.tsx(115,35): error TS2339: Property 'description' does not exist on type 'never'.
+app/view/[id]/page.tsx(122,100): error TS2339: Property 'id' does not exist on type 'never'.
+app/view/[id]/page.tsx(126,72): error TS2339: Property 'created_at' does not exist on type 'never'.

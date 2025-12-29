@@ -1,0 +1,57 @@
+# Project Configuration & Idea Record
+
+## Done
+
+- **Core Infrastructure**
+    - [x] Next.js 14+ App Router scaffold.
+    - [x] Tailwind CSS v4 setup with custom "Brutalist" design system (high contrast, crisp borders).
+    - [x] Supabase integration (Database + Storage + Singleton Client).
+
+- **Database & Security**
+    - [x] SQL Schema: `submissions` and `votes` tables with strict typing.
+    - [x] RLS Policies: `anon` read/write permissions for specific flows.
+    - [x] Abuse Prevention: `lib/fingerprint.ts` (IP+UA hashing) for rate limiting.
+    - [x] Rate Limiting: Max 5 submissions/hour per fingerprint.
+    - [x] Storage Security: Public bucket with specific `INSERT` policies for uploads.
+
+- **Upload Feature**
+    - [x] `<UploadForm />`: Client-side visual feedback (filename), hCaptcha protection.
+    - [x] Server Action: Secure file handling, MIME type validation, 50MB limits.
+    - [x] File Support: PDF, Image, CSV.
+
+- **Feed & Interaction**
+    - [x] Live Feed: Fetches real data from Supabase, ordered by date.
+    - [x] Voting: Optimistic UI updates with server-side duplicate vote prevention.
+    - [x] Pagination: Cursor-based loading (limit 20).
+
+- **Viewing Experience**
+    - [x] Dedicated View Page (`/view/[id]`).
+    - [x] CSV Renderer: Server-side parsing to HTML table preview.
+    - [x] PDF Renderer: Native browser iframe embedding.
+    - [x] Image Renderer: Responsive scaling.
+
+- **Static Content**
+    - [x] About Page: Full manifesto, live database stats, warrant canary logic.
+    - [x] Legal Pages: Terms of Service, Privacy Policy.
+
+## Todo / Imagined
+
+- **Decentralization & Resilience (Priority)**
+    - [ ] **BitTorrent Integration**: Auto-generate magnet links for every upload (client-side WebTorrent or server-side).
+    - [ ] **IPFS Mirroring**: Pin submissions to IPFS for redundancy.
+    - [ ] **Tor Hidden Service**: Config for running as a .onion site.
+    - [ ] **"Fork & Eject" Script**: One-click script to clone DB/Storage to a local archive.
+
+- **Feature Enhancements**
+    - [ ] **Thumbnail Generation**: Server-side processing to generate previews for PDFs/Images on upload.
+    - [ ] **Full-Text Search**: Search `title`, `description`, and OCR'd content.
+    - [ ] **Moderation Queue**: Community flagging system for illegal content.
+    - [ ] **Real Warrant Canary**: Automated system to digitally sign a daily "alive" message.
+
+- **Financial / Crypto**
+    - [ ] **Live Monero Ticker**: Fetch real wallet balance for transparency.
+    - [ ] **Dynamic QR Codes**: Generate payment requests.
+
+- **Analytics**
+    - [ ] **Download Stats**: Track file downloads (currently only views are tracked).
+    - [ ] **Referrer Tracking**: See where traffic is coming from (without intrusive cookies).

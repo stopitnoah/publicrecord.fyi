@@ -9,6 +9,13 @@ export default async function Home() {
 
     return (
         <div className="space-y-12">
+            {/* Resilience Marquee */}
+            <div className="bg-black text-white py-1 overflow-hidden whitespace-nowrap border-t-2 border-b-2 border-black">
+                <div className="animate-marquee inline-block font-mono text-[10px] font-bold uppercase tracking-widest">
+                    TRIPLE REDUNDANCY ACTIVE: CLOUD (SUPABASE) • P2P (BITTORRENT) • DECENTRALIZED (IPFS) • SEIZURE-PROOF ARCHITECTURE ENABLED • FORKABLE METADATA • OPEN SOURCE INDEPENDENCE •
+                    TRIPLE REDUNDANCY ACTIVE: CLOUD (SUPABASE) • P2P (BITTORRENT) • DECENTRALIZED (IPFS) • SEIZURE-PROOF ARCHITECTURE ENABLED • FORKABLE METADATA • OPEN SOURCE INDEPENDENCE •
+                </div>
+            </div>
             {/* Washington Ruling Banner */}
             <div className="bg-yellow-300 border-4 border-black p-4 flex flex-col md:flex-row items-center justify-between gap-4 brutal-shadow">
                 <div className="flex items-center gap-3">

@@ -4,6 +4,8 @@ import { supabase } from '@/lib/supabase';
 import { getFingerprint } from '@/lib/fingerprint';
 import { redirect } from 'next/navigation';
 import crypto from 'crypto';
+import sharp from 'sharp';
+import { createWorker } from 'tesseract.js';
 
 const MAX_SIZE = 50 * 1024 * 1024; // 50MB
 const ALLOWED_TYPES = ['application/pdf', 'image/png', 'image/jpeg', 'text/csv'];
@@ -101,6 +103,72 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const publicUrlResult = supabase.storage.from('submissions').getPublicUrl(safeName);
     const publicUrl = publicUrlResult.data.publicUrl;
 
+    // 4.5. Pin to IPFS (Pinata)
+    let ipfsCid = null;
+    const pinataJwt = process.env.PINATA_JWT;
+    if (pinataJwt) {
+        try {
+            const formDataPinata = new FormData();
+            formDataPinata.append('file', file);
+
+            const pinataRes = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${pinataJwt}`
+                },
+                body: formDataPinata
+            });
+
+            if (pinataRes.ok) {
+                const pinataJson = await pinataRes.json();
+                ipfsCid = pinataJson.IpfsHash;
+            } else {
+                console.error('Pinata upload failed', await pinataRes.text());
+            }
+        } catch (e) {
+            console.error('IPFS Pinning error', e);
+        }
+    }
+
+    // 4.6. Generate Thumbnail (Images only for now)
+    let thumbnailUrl = null;
+    if (file.type.startsWith('image/')) {
+        try {
+            const buffer = Buffer.from(await file.arrayBuffer());
+            const thumbBuffer = await sharp(buffer)
+                .resize(600, 600, { fit: 'inside', withoutEnlargement: true })
+                .jpeg({ quality: 80 })
+                .toBuffer();
+
+            const thumbName = `thumb_${Date.now()}_${safeName.replace(/\.[^/.]+$/, ".jpg")}`;
+            const { error: thumbUploadError } = await supabase.storage
+                .from('submissions')
+                .upload(thumbName, thumbBuffer, { contentType: 'image/jpeg' });
+
+            if (!thumbUploadError) {
+                thumbnailUrl = supabase.storage.from('submissions').getPublicUrl(thumbName).data.publicUrl;
+            } else {
+                console.error('Thumbnail upload failed', thumbUploadError);
+            }
+        } catch (e) {
+            console.error('Thumbnail generation error', e);
+        }
+    }
+
+    // 4.7. OCR Processing (Images only)
+    let extractedText = null;
+    if (file.type.startsWith('image/')) {
+        try {
+            const buffer = Buffer.from(await file.arrayBuffer());
+            const worker = await createWorker('eng');
+            const { data: { text } } = await worker.recognize(buffer);
+            extractedText = text;
+            await worker.terminate();
+        } catch (e) {
+            console.error('OCR processing error', e);
+        }
+    }
+
     // 5. Insert Record
     const { data: insertData, error: insertError } = await supabase
         .from('submissions')
@@ -114,7 +182,10 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
             file_type: file.type,
             client_fingerprint: fingerprint,
             category: category,
-            magnet_uri: magnetUri
+            magnet_uri: magnetUri,
+            ipfs_cid: ipfsCid,
+            thumbnail_url: thumbnailUrl,
+            extracted_text: extractedText
         })
         .select()
         .single();

@@ -98,6 +98,17 @@ export default function Feed({ initialData }: { initialData: Submission[] }) {
                                     <span className="bg-black text-white px-2 py-0.5 text-xs font-bold uppercase tracking-wider">{item.state}</span>
                                     <span className="text-xs font-mono text-gray-500 border-b border-black">{new Date(item.date).toLocaleDateString()}</span>
                                 </div>
+
+                                {item.thumbnail_url && (
+                                    <Link href={`/view/${item.id}`} className="block mb-2 overflow-hidden border border-black bg-gray-50 aspect-video relative group">
+                                        <img
+                                            src={item.thumbnail_url}
+                                            alt=""
+                                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-300 group-hover:scale-105"
+                                        />
+                                    </Link>
+                                )}
+
                                 <h3 className="font-bold text-lg leading-tight mb-1 line-clamp-3 min-h-[3.5rem]">
                                     <Link href={`/view/${item.id}`} className="hover:underline decoration-2 underline-offset-2">
                                         {item.title}

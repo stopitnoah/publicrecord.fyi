@@ -21,7 +21,7 @@ body {
   .brutal-border {
     border: 2px solid black;
   }
-  
+
   .brutal-shadow {
     box-shadow: 4px 4px 0px 0px #000000;
   }
@@ -30,4 +30,27 @@ body {
     @apply px-4 py-2 bg-white text-black border-2 border-black font-bold transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-gray-50;
     box-shadow: 4px 4px 0px 0px #000000;
   }
+
+  .text-glitch {
+    text-shadow: 2px 2px 0px #ff0000, -2px -2px 0px #0000ff;
+  }
+
+  .bg-grid {
+    background-image: radial-gradient(#ccc 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
 }

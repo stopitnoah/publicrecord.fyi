@@ -49,6 +49,16 @@ export default function EmergencyPage() {
                             <li>Point your own domain to the new instance.</li>
                         </ol>
                     </div>
+
+                    <div className="bg-purple-50 border-2 border-black p-4 mt-4">
+                        <h4 className="font-bold uppercase text-purple-900">Tor Anonymous Hosting:</h4>
+                        <p className="text-sm mb-2">To host this site as a hidden service (.onion):</p>
+                        <ul className="list-disc list-inside text-xs space-y-1">
+                            <li>Install Tor on your server.</li>
+                            <li>Copy <code>torrc.example</code> to your tor configuration.</li>
+                            <li>Your site is now accessible anonymously via the Tor Browser.</li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 

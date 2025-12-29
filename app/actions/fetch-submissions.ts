@@ -23,7 +23,7 @@ export async function fetchSubmissions(
         }
 
         if (search && search !== '') {
-            query = query.or(`official_name.ilike.%${search}%,title.ilike.%${search}%,description.ilike.%${search}%`);
+            query = query.or(`official_name.ilike.%${search}%,title.ilike.%${search}%,description.ilike.%${search}%,extracted_text.ilike.%${search}%`);
         }
 
         if (sort === 'top') {

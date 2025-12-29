@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Papa from 'papaparse';
 import VoteButton from '@/app/components/vote-button';
 import ReportButton from '@/app/components/report-button';
+import DownloadButton from '@/app/components/download-button';
 
 export const revalidate = 60;
 
@@ -97,10 +98,7 @@ export default async function ViewPage({ params }: Props) {
                     </div>
 
                     <div className="text-center md:text-right">
-                        <a href={data.file_url} download target="_blank" className="brutal-btn text-xs inline-flex items-center gap-2">
-                            <span>DOWNLOAD FILE</span>
-                            <span className="opacity-50">({data.file_type.split('/')[1].toUpperCase()})</span>
-                        </a>
+                        <DownloadButton fileUrl={data.file_url} fileType={data.file_type} id={data.id} />
                     </div>
                 </div>
 
@@ -147,6 +145,25 @@ export default async function ViewPage({ params }: Props) {
                                     {data.magnet_uri}
                                 </p>
                             </div>
+
+                            {data.ipfs_cid && (
+                                <div className="mt-4 pt-4 border-t border-gray-800">
+                                    <p className="text-[10px] font-bold uppercase text-yellow-500 mb-1">IPFS Backup (CID):</p>
+                                    <div className="flex flex-col gap-2">
+                                        <code className="text-[10px] bg-gray-900 p-1 border border-gray-700 text-gray-400 break-all select-all">
+                                            {data.ipfs_cid}
+                                        </code>
+                                        <a
+                                            href={`https://${process.env.PINATA_GATEWAY || 'ipfs.io'}/ipfs/${data.ipfs_cid}`}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-[10px] font-bold uppercase underline hover:text-yellow-400"
+                                        >
+                                            View via IPFS Gateway →
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     )}
 
@@ -162,6 +179,10 @@ export default async function ViewPage({ params }: Props) {
                         <div className="flex justify-between items-center mt-1">
                             <span>Views:</span>
                             <span className="font-bold">{data.view_count || 0}</span>
+                        </div>
+                        <div className="flex justify-between items-center mt-1">
+                            <span>Downloads:</span>
+                            <span className="font-bold">{data.download_count || 0}</span>
                         </div>
                         <div className="mt-4 flex justify-end">
                             <ReportButton id={data.id} />

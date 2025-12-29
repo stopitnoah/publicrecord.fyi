@@ -1,0 +1,17 @@
+# Example torrc for publicrecord.fyi
+# -----------------------------------
+# This configuration allows you to host the site as a .onion hidden service.
+
+# 1. Install Tor (e.g., sudo apt install tor)
+# 2. Add these lines to your /etc/tor/torrc
+# 3. Restart Tor: sudo service tor restart
+# 4. Find your address: sudo cat /var/lib/tor/hidden_service/hostname
+
+HiddenServiceDir /var/lib/tor/publicrecord_service/
+HiddenServicePort 80 127.0.0.1:3000
+
+# Security Tuning
+HiddenServiceMaxStreams 0
+HiddenServiceMaxStreamsCloseCircuit 0
+SafeLogging 1
+Log notice stdout

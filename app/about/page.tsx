@@ -214,9 +214,11 @@ export default async function AboutPage() {
                         </div>
 
                         <div className="flex justify-center py-4 bg-white border-2 border-black">
-                            <div className="w-32 h-32 bg-gray-200 flex items-center justify-center font-mono text-xs text-center p-2">
-                                [QR CODE]
-                            </div>
+                            <img
+                                src="/Monero_QR_code.png"
+                                alt="Monero Donation QR Code"
+                                className="w-[300px] h-[300px] object-contain px-2"
+                            />
                         </div>
                     </div>
                 </section>

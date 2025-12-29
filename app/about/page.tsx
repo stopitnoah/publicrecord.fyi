@@ -209,7 +209,7 @@ export default async function AboutPage() {
                         <div className="space-y-1">
                             <p className="text-xs font-mono uppercase font-bold text-gray-500">Monero Address (XMR)</p>
                             <div className="bg-white border-2 border-black p-2 font-mono text-xs break-all select-all">
-                                847520...[YOUR MONERO ADDRESS]...
+                                488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY
                             </div>
                         </div>
 
@@ -249,9 +249,6 @@ export default async function AboutPage() {
                 </div>
                 <h2 className="text-3xl font-black uppercase tracking-tight text-white">A Personal Note</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4 text-gray-200">
-                    <p>
-                        I live in my Tesla. I've legally changed my name and transitioned gender. I use GrapheneOS and Qubes. I have a virtual office as my legal address.
-                    </p>
                     <p>
                         I don't do this because I'm paranoid. I do this because I've lived under surveillance my entire life, and I refuse to make it easy for them.
                     </p>

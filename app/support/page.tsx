@@ -3,83 +3,51 @@ import Image from 'next/image';
 
 export const revalidate = 60;
 
-async function getStats() {
-    const { count } = await supabase
-        .from('submissions')
-        .select('*', { count: 'exact', head: true });
-
-    return {
-        submissions: count || 0,
-    };
-}
-
 export default async function SupportPage() {
-    const stats = await getStats();
-
     return (
         <div className="max-w-3xl mx-auto py-12 space-y-16">
             <section className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none border-b-8 border-black pb-6">
                     Support<br />The Mission
                 </h1>
-                <p className="text-lg font-medium">
-                    publicrecord.fyi is a self-funded project. Your donations help cover hosting, bandwidth, and legal defense.
+                <p className="text-lg font-medium italic underline decoration-yellow-300 decoration-4">
+                    publicrecord.fyi is a self-funded project. Your contributions fund P2P infrastructure and legal defense.
                 </p>
             </section>
 
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid md:grid-cols-1 gap-12">
                 <section className="space-y-6">
-                    <h2 className="text-3xl font-black uppercase tracking-tight">Donate Monero</h2>
-                    <div className="bg-yellow-50 p-6 border-2 border-black space-y-4 brutal-shadow">
-                        <p className="font-bold">Because privacy matters, we only accept Monero (XMR).</p>
+                    <h2 className="text-3xl font-black uppercase tracking-tight">Donate Monero (XMR)</h2>
+                    <div className="bg-white p-8 border-4 border-black space-y-8 brutal-shadow relative overflow-hidden">
+                        <div className="absolute top-0 right-0 p-4 opacity-5 font-black text-9xl leading-none select-none pointer-events-none">
+                            XMR
+                        </div>
 
-                        <div className="space-y-1">
-                            <p className="text-xs font-mono uppercase font-bold text-gray-500">Address</p>
-                            <div className="bg-white border-2 border-black p-2 font-mono text-[10px] break-all select-all">
+                        <p className="font-bold text-xl leading-snug max-w-md">
+                            Privacy is a prerequisite for freedom. We only accept <span className="bg-yellow-300 px-1">Monero</span> to protect your financial history.
+                        </p>
+
+                        <div className="space-y-2">
+                            <p className="text-xs font-mono uppercase font-black text-gray-400 tracking-widest">Public Contribution Address</p>
+                            <div className="bg-gray-50 border-2 border-black p-3 font-mono text-[11px] break-all select-all brutal-shadow-small">
                                 488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY
                             </div>
                         </div>
 
-                        <div className="flex justify-center py-4 bg-white border-2 border-black relative min-h-[300px]">
-                            <Image
-                                src="/Monero_QR_code.png"
-                                alt="Monero Donation QR Code"
-                                width={300}
-                                height={300}
-                                className="object-contain px-2"
-                            />
-                        </div>
-                    </div>
-                </section>
-
-                <section className="space-y-6">
-                    <h2 className="text-3xl font-black uppercase tracking-tight">Transparency</h2>
-                    <div className="bg-gray-100 p-6 border-2 border-black font-mono text-sm space-y-6 brutal-shadow">
-                        <div>
-                            <h4 className="font-bold border-b border-black mb-2 uppercase">Funding Status</h4>
-                            <div className="flex justify-between py-1">
-                                <span>Total donated:</span>
-                                <span className="font-bold">0.00 XMR</span>
+                        <div className="flex flex-col md:flex-row gap-8 items-center bg-gray-50 p-6 border-2 border-black">
+                            <div className="bg-white border-2 border-black p-2 brutal-shadow-small shrink-0">
+                                <Image
+                                    src="/Monero_QR_code.png"
+                                    alt="Monero Donation QR Code"
+                                    width={200}
+                                    height={200}
+                                    className="object-contain"
+                                />
                             </div>
-                            <div className="flex justify-between py-1">
-                                <span>Monthly costs:</span>
-                                <span>$25-50 + Legal</span>
-                            </div>
-                            <div className="flex justify-between py-1">
-                                <span>Current runway:</span>
-                                <span>Infinite (Self-funded)</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="font-bold border-b border-black mb-2 uppercase">Impact</h4>
-                            <div className="flex justify-between py-1">
-                                <span>Submissions:</span>
-                                <span className="font-bold">{stats.submissions}</span>
-                            </div>
-                            <div className="flex justify-between py-1">
-                                <span>Active Mirrors:</span>
-                                <span>12</span>
+                            <div className="prose prose-sm font-medium italic text-gray-600">
+                                <p>
+                                    Scan this code to contribute instantly. Your support ensures the survival of this archive against seizure and legal pressure.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -87,13 +55,13 @@ export default async function SupportPage() {
             </div>
 
             <section className="bg-black text-white p-8 md:p-12 space-y-6 brutal-shadow-white mt-12">
-                <h2 className="text-3xl font-black uppercase tracking-tight text-white">Why Just Monero?</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight text-white underline decoration-yellow-300">Why Only Monero?</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4 text-gray-200">
                     <p>
-                        Credit cards and banks are surveillance tools. They track who you support, when, and how much.
+                        Credit cards, banks, and transparent blockchains are surveillance tools. They create a permanent, searchable record of your associations and beliefs.
                     </p>
                     <p>
-                        Monero is the only digital currency that functions like cash: private, untraceable, and censorship-resistant. If we&apos;re going to fight for privacy, we should use tools that respect it.
+                        Monero is the only digital currency that functions like cash: private by default, untraceable, and censorship-resistant. We use it because we practice what we preach.
                     </p>
                 </div>
             </section>

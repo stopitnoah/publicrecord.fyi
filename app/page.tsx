@@ -34,55 +34,36 @@ export default async function Home() {
 
             {/* Washington Ruling Banner */}
             <div className="bg-yellow-300 border-4 border-black p-4 flex flex-col md:flex-row items-center justify-between gap-4 brutal-shadow">
-                <div className="flex items-center gap-3">
-                    <span className="text-3xl">⚖️</span>
-                    <p className="font-bold text-sm md:text-base">
-                        <strong className="uppercase">Legal Precedent:</strong> Washington State court ruled ALPR data = public records (Nov 2024)
-                    </p>
-                </div>
-                <Link href="/resources" className="text-xs font-bold underline shrink-0 hover:text-gray-700">
-                    Read Ruling & Templates →
-                </Link>
-            </div>
 
-            {/* Greenwald Quote Section */}
-            <div className="border-2 border-black p-6 md:p-10 brutal-shadow bg-gray-50 relative overflow-hidden">
-                <blockquote className="text-xl md:text-2xl lg:text-3xl font-serif italic leading-relaxed max-w-3xl mb-6">
-                    &quot;We are supposed to know nearly everything about them. That is why they are called <strong className="not-italic">public servants</strong>.<br /><br />
-                    They on the other hand are supposed to know nearly nothing about us. That is why we are called <strong className="not-italic">private citizens</strong>.&quot;
-                </blockquote>
-                <p className="font-mono text-sm text-gray-600 mb-8">— Glenn Greenwald</p>
-            </div>
-
-            {/* It's Working Section (Proof) */}
-            <div className="border-2 border-black p-6 md:p-8 bg-green-50 space-y-4 brutal-shadow">
-                <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                    <span>✓</span> Proof of Impact
-                </h2>
-                <div className="grid md:grid-cols-2 gap-8 items-center">
-                    <p className="font-medium leading-relaxed">
-                        After the Washington court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could now track his department&apos;s movements as easily as they tracked theirs.
-                    </p>
-                    <div className="border-l-4 border-black pl-6 space-y-4">
-                        <blockquote className="italic text-gray-700 border-b border-black border-dotted pb-2">
-                            &quot;I thought if you weren&apos;t doing anything wrong, you didn&apos;t have to worry about who was watching you. I guess that only applies to private citizens.&quot;
-                        </blockquote>
-                        <p className="text-sm font-bold uppercase tracking-tighter">Radical transparency forces accountability.</p>
+                {/* It's Working Section (Proof) */}
+                <div className="border-2 border-black p-6 md:p-8 bg-green-50 space-y-4 brutal-shadow">
+                    <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
+                        <span>✓</span> Proof of Impact
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-8 items-center">
+                        <p className="font-medium leading-relaxed">
+                            After the Washington court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could now track his department&apos;s movements as easily as they tracked theirs.
+                        </p>
+                        <div className="border-l-4 border-black pl-6 space-y-4">
+                            <blockquote className="italic text-gray-700 border-b border-black border-dotted pb-2">
+                                &quot;I thought if you weren&apos;t doing anything wrong, you didn&apos;t have to worry about who was watching you. I guess that only applies to private citizens.&quot;
+                            </blockquote>
+                            <p className="text-sm font-bold uppercase tracking-tighter">Radical transparency forces accountability.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* Feed */}
-            <div id="feed" className="pt-8">
-                <div className="flex justify-between items-end mb-8 border-b-4 border-black pb-2">
-                    <div className="space-y-1">
-                        <p className="text-[10px] font-black uppercase text-gray-400">The Registry</p>
-                        <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter">Recent Submissions</h3>
+                {/* Feed */}
+                <div id="feed" className="pt-8">
+                    <div className="flex justify-between items-end mb-8 border-b-4 border-black pb-2">
+                        <div className="space-y-1">
+                            <p className="text-[10px] font-black uppercase text-gray-400">The Registry</p>
+                            <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter">Recent Submissions</h3>
+                        </div>
+                        <span className="font-mono text-xs md:text-sm animate-pulse">● LIVE DATASTREAM</span>
                     </div>
-                    <span className="font-mono text-xs md:text-sm animate-pulse">● LIVE DATASTREAM</span>
+                    <Feed initialData={initialData} />
                 </div>
-                <Feed initialData={initialData} />
             </div>
-        </div>
-    );
+            );
 }

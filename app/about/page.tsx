@@ -11,6 +11,15 @@ export default function AboutPage() {
                 </h1>
             </section>
 
+            {/* Greenwald Quote Section */}
+            <div className="border-2 border-black p-6 md:p-10 brutal-shadow bg-gray-50 relative overflow-hidden">
+                <blockquote className="text-xl md:text-2xl lg:text-3xl font-serif italic leading-relaxed max-w-3xl mb-4">
+                    &quot;We are supposed to know nearly everything about them. That is why they are called <strong className="not-italic">public servants</strong>.<br /><br />
+                    They on the other hand are supposed to know nearly nothing about us. That is why we are called <strong className="not-italic">private citizens</strong>.&quot;
+                </blockquote>
+                <p className="font-mono text-sm text-gray-600">— Glenn Greenwald</p>
+            </div>
+
             {/* The Problem */}
             <section className="space-y-6">
                 <h2 className="text-3xl font-black uppercase tracking-tight">The Problem</h2>

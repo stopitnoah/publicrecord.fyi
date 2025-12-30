@@ -11,37 +11,21 @@ export default function MoneroTicker() {
         getMoneroStats().then(setStats);
     }, []);
 
-    if (!stats) return <div className="font-mono text-[10px] animate-pulse">CONNECTING TO XMR NETWORK...</div>;
+    if (!stats) return null;
 
     return (
         <div className="border-t-2 border-black bg-white p-4 font-mono">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div className="flex flex-wrap gap-4 text-xs">
-                    <div className="flex flex-col">
-                        <span className="text-[9px] text-gray-500 uppercase font-bold">XMR Price</span>
-                        <span className="font-black">${stats.price.toLocaleString()} USD</span>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className="text-[9px] text-gray-500 uppercase font-bold">Transparency Balance</span>
-                        <span className="font-black text-red-600">{stats.balance}</span>
-                    </div>
-                </div>
-
-                <div className="flex items-center gap-4 w-full md:w-auto">
-                    <button
-                        onClick={() => setShowPay(!showPay)}
-                        className="brutal-btn px-4 py-1 text-[10px] uppercase tracking-widest bg-yellow-300"
-                    >
-                        {showPay ? 'Close' : 'Support Resilience (XMR)'}
-                    </button>
-                    <div className="hidden md:block text-[9px] text-gray-400 max-w-[200px] leading-tight italic">
-                        All contributions fund P2P infrastructure and legal defense.
-                    </div>
-                </div>
+            <div className="flex justify-center">
+                <button
+                    onClick={() => setShowPay(!showPay)}
+                    className="brutal-btn px-8 py-2 text-xs uppercase tracking-widest bg-yellow-300 font-black"
+                >
+                    {showPay ? 'Hide Support Options' : 'Support The Mission (XMR)'}
+                </button>
             </div>
 
             {showPay && (
-                <div className="mt-4 p-4 border-2 border-black bg-gray-50 flex flex-col md:flex-row gap-6 items-center animate-in slide-in-from-bottom-2">
+                <div className="max-w-xl mx-auto mt-4 p-4 border-2 border-black bg-gray-50 flex flex-col md:flex-row gap-6 items-center animate-in slide-in-from-bottom-2">
                     <QRCode data={stats.address} />
                     <div className="space-y-2 flex-grow">
                         <p className="text-xs font-bold uppercase">Public Donation Address:</p>

@@ -22,20 +22,20 @@ export default function RootLayout({
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-[#f8f8f8] text-black min-h-screen flex flex-col`}>
         {/* Navigation */}
         <nav className="border-b-4 border-black bg-white sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-4">
             <Link href="/" className="text-2xl font-black uppercase tracking-tighter hover:bg-black hover:text-white transition-colors px-2">
               PublicRecord<span className="text-gray-500">.fyi</span>
             </Link>
+            <Link href="/network" className="hidden sm:flex items-center gap-2 px-2 py-0.5 border border-black hover:bg-black hover:text-white transition-all group">
+              <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+              <span className="text-[10px] font-black uppercase tracking-tighter">Network: Stable</span>
+            </Link>
+          </div>
 
-            <div className="flex items-center gap-4 sm:gap-6">
-              <Link href="/about" className="text-sm font-bold uppercase hover:underline">About</Link>
-              <Link href="/network" className="hidden md:flex items-center gap-2 px-2 py-0.5 border border-black hover:bg-black hover:text-white transition-all group">
-                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                <span className="text-[10px] font-black uppercase tracking-tighter">Network: Stable</span>
-              </Link>
-              <Link href="/support" className="text-sm font-bold uppercase hover:underline">Support</Link>
-              <Link href="/upload" className="brutal-btn px-4 py-1 text-sm uppercase">Submit</Link>
-            </div>
+          <div className="flex items-center gap-4 sm:gap-6">
+            <Link href="/about" className="text-sm font-bold uppercase hover:underline">About</Link>
+            <Link href="/support" className="text-sm font-bold uppercase hover:underline">Support</Link>
+            <Link href="/upload" className="brutal-btn px-4 py-1 text-sm uppercase">Submit</Link>
           </div>
         </nav>
 

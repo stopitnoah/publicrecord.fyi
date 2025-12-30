@@ -1,9 +1,15 @@
 import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
+import { getMoneroStats } from '../actions/get-monero-stats';
 
 export const revalidate = 60;
 
 export default async function SupportPage() {
+    const stats = await getMoneroStats();
+    const displayAddress = stats.address === 'Not Configured'
+        ? '488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY' // Fallback to provided
+        : stats.address;
+
     return (
         <div className="max-w-3xl mx-auto py-12 space-y-16">
             <section className="space-y-4">
@@ -30,7 +36,7 @@ export default async function SupportPage() {
                         <div className="space-y-2">
                             <p className="text-xs font-mono uppercase font-black text-gray-400 tracking-widest">Public Contribution Address</p>
                             <div className="bg-gray-50 border-2 border-black p-3 font-mono text-[11px] break-all select-all brutal-shadow-small">
-                                488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY
+                                {displayAddress}
                             </div>
                         </div>
 
@@ -47,6 +53,9 @@ export default async function SupportPage() {
                             <div className="prose prose-sm font-medium italic text-gray-600">
                                 <p>
                                     Scan this code to contribute instantly. Your support ensures the survival of this archive against seizure and legal pressure.
+                                </p>
+                                <p className="mt-2 text-[10px] font-mono opacity-50">
+                                    URI: monero:{displayAddress}
                                 </p>
                             </div>
                         </div>

@@ -7,56 +7,75 @@ export const revalidate = 60;
 export default async function SupportPage() {
     const stats = await getMoneroStats();
     const displayAddress = stats.address === 'Not Configured'
-        ? '488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY' // Fallback to provided
+        ? '488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY'
         : stats.address;
 
     return (
-        <div className="max-w-3xl mx-auto py-12 space-y-16">
+        <div className="max-w-4xl mx-auto py-12 space-y-16">
             <section className="space-y-4">
                 <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none border-b-8 border-black pb-6">
                     Support<br />The Mission
                 </h1>
-                <p className="text-lg font-medium italic underline decoration-yellow-300 decoration-4">
-                    publicrecord.fyi is a self-funded project. Your contributions fund P2P infrastructure and legal defense.
+                <p className="text-xl font-bold italic underline decoration-yellow-300 decoration-4 max-w-2xl text-balance">
+                    Redundant, decentralized infrastructure isn&apos;t free. Your contributions fund hosting, global mirroring, and legal defense.
                 </p>
             </section>
 
-            <div className="grid md:grid-cols-1 gap-12">
+            <div className="grid md:grid-cols-2 gap-8">
+                {/* Credit Card Section */}
                 <section className="space-y-6">
-                    <h2 className="text-3xl font-black uppercase tracking-tight">Donate Monero (XMR)</h2>
-                    <div className="bg-white p-8 border-4 border-black space-y-8 brutal-shadow relative overflow-hidden">
-                        <div className="absolute top-0 right-0 p-4 opacity-5 font-black text-9xl leading-none select-none pointer-events-none">
-                            XMR
+                    <h2 className="text-3xl font-black uppercase tracking-tight">Standard Contribution</h2>
+                    <div className="bg-white p-8 border-4 border-black space-y-6 brutal-shadow relative flex flex-col h-full">
+                        <div className="flex items-center gap-4 text-gray-400">
+                            <span className="font-mono text-xs font-bold uppercase tracking-widest">Credit / Debit / Apple Pay</span>
                         </div>
 
-                        <p className="font-bold text-xl leading-snug max-w-md">
-                            Privacy is a prerequisite for freedom. We only accept <span className="bg-yellow-300 px-1">Monero</span> to protect your financial history.
+                        <p className="font-bold text-lg leading-snug">
+                            Fast and direct. Suitable for public supporters who value ease of use.
+                        </p>
+
+                        <div className="space-y-4 mt-auto">
+                            <button className="w-full brutal-btn bg-black text-white text-center py-4 uppercase font-black tracking-widest hover:bg-gray-800 transition-colors">
+                                Pay with Card
+                            </button>
+                            <p className="text-[10px] font-mono text-gray-500 italic">
+                                * Payments processed via encrypted gateway.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Monero Section */}
+                <section className="space-y-6">
+                    <h2 className="text-3xl font-black uppercase tracking-tight">Private Contribution</h2>
+                    <div className="bg-white p-8 border-4 border-black space-y-6 brutal-shadow relative flex flex-col h-full">
+                        <div className="flex items-center gap-2 text-yellow-600">
+                            <span className="font-mono text-xs font-bold uppercase tracking-widest">Monero (XMR)</span>
+                        </div>
+
+                        <p className="font-bold text-lg leading-snug">
+                            Zero traceability. Recommended for high-risk supporters and privacy advocates.
                         </p>
 
                         <div className="space-y-2">
-                            <p className="text-xs font-mono uppercase font-black text-gray-400 tracking-widest">Public Contribution Address</p>
-                            <div className="bg-gray-50 border-2 border-black p-3 font-mono text-[11px] break-all select-all brutal-shadow-small">
+                            <div className="bg-gray-50 border-2 border-black p-3 font-mono text-[10px] break-all select-all brutal-shadow-small">
                                 {displayAddress}
                             </div>
                         </div>
 
-                        <div className="flex flex-col md:flex-row gap-8 items-center bg-gray-50 p-6 border-2 border-black">
-                            <div className="bg-white border-2 border-black p-2 brutal-shadow-small shrink-0">
+                        <div className="mt-auto flex gap-4 items-center bg-gray-50 p-4 border-2 border-black">
+                            <div className="bg-white border-2 border-black p-1 brutal-shadow-small shrink-0">
                                 <Image
                                     src="/Monero_QR_code.png"
                                     alt="Monero Donation QR Code"
-                                    width={200}
-                                    height={200}
+                                    width={100}
+                                    height={100}
                                     className="object-contain"
                                 />
                             </div>
-                            <div className="prose prose-sm font-medium italic text-gray-600">
-                                <p>
-                                    Scan this code to contribute instantly. Your support ensures the survival of this archive against seizure and legal pressure.
-                                </p>
-                                <p className="mt-2 text-[10px] font-mono opacity-50">
-                                    URI: monero:{displayAddress}
-                                </p>
+                            <div className="text-[10px] font-medium italic text-gray-600">
+                                Scan to contribute privately. <br />
+                                monero:{displayAddress.substring(0, 10)}...
                             </div>
                         </div>
                     </div>
@@ -64,13 +83,13 @@ export default async function SupportPage() {
             </div>
 
             <section className="bg-black text-white p-8 md:p-12 space-y-6 brutal-shadow-white mt-12">
-                <h2 className="text-3xl font-black uppercase tracking-tight text-white underline decoration-yellow-300">Why Only Monero?</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight text-white underline decoration-yellow-300">Resilience Philosophy</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4 text-gray-200">
                     <p>
-                        Credit cards, banks, and transparent blockchains are surveillance tools. They create a permanent, searchable record of your associations and beliefs.
+                        Every dollar and XMR received is distributed across our network of 12 active mirrors to ensure this registry outlives any single server or domain.
                     </p>
                     <p>
-                        Monero is the only digital currency that functions like cash: private by default, untraceable, and censorship-resistant. We use it because we practice what we preach.
+                        We use <span className="text-yellow-300 font-bold uppercase">adversarial architecture</span>. By supporting this mission, you are not just funding a website; you are funding a permanent, un-censorable public utility.
                     </p>
                 </div>
             </section>

@@ -1,0 +1,44 @@
+--- SEEDING AUTHENTIC FOIA DATA ---
+(node:18372) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/noahf/Desktop/publicrecord.fyi/scripts/seed-data.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\noahf\Desktop\publicrecord.fyi\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  Cleaned up existing matching records.
+Processing: Congressional Investigation: Flock Safety Reproductive Tracking...
+  Read real file: seed_assets/congress_letter.pdf
+  [SUCCESS]
+Processing: Audit Findings: National Data Sharing Violation...
+  Using fallback content (PDF not found locally)
+  [SUCCESS]
+Processing: Indictment: Perjury & Misuse of ALPR Systems...
+  Using fallback content (PDF not found locally)
+  [SUCCESS]
+Processing: Braselton Police Chief Arrest Record...
+  Using fallback content (PDF not found locally)
+  [SUCCESS]
+Processing: Cambridge MA Terminates Flock Contract After Unauthorized Installation...
+  Read real file: seed_assets/cambridge_termination.txt
+  [SUCCESS]
+Processing: Alabama Power + Moody PD Flock Camera Lease Agreement...
+  Read real file: seed_assets/moody_al_lease.pdf
+  [SUCCESS]
+Processing: Garner NC Police 5-Year Flock Contract...
+  Read real file: seed_assets/garner_nc_contract.pdf
+  [SUCCESS]
+Processing: Schaumburg IL Police Flock Safety Agreement...
+  Read real file: seed_assets/schaumburg_il_contract.pdf
+  [SUCCESS]
+Processing: Denver Police Flock Camera Locations (52+ Sites)...
+  Read real file: seed_assets/denver_locations.pdf
+  [SUCCESS]
+Processing: Flock Safety Official ALPR User Guide (28 pages)...
+  Read real file: seed_assets/flock_user_guide.pdf
+  [SUCCESS]
+Processing: Flock Safety Sales Pitch to Law Enforcement...
+  Read real file: seed_assets/flock_marketing_pitch.pdf
+  [SUCCESS]
+Processing: 200 Agencies 2.5B License Plate Scans (2016-2017)...
+  Read real file: seed_assets/eff_dataset_summary.txt
+  [SUCCESS]
+
+SEEDING COMPLETE.

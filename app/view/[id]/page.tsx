@@ -146,7 +146,12 @@ export default async function ViewPage({ params }: Props) {
                                             ))}
                                         </tbody>
                                     </table>
-                                    {csvData.length === 0 && <p className="p-8 text-center text-gray-400 italic">Preview limited or file empty.</p>}
+                                    {csvData.length === 0 && <p className="p-8 text-center text-gray-400 italic font-mono uppercase">CSV Header parsed, but no data rows available.</p>}
+                                </div>
+                            )}
+                            {(data.file_type === 'text/plain' || data.file_type === 'text/plain; charset=utf-8') && (
+                                <div className="w-full h-[60vh] overflow-auto bg-white border-2 border-black p-6 font-mono text-sm whitespace-pre-wrap leading-relaxed">
+                                    {data.extracted_text || "No text content available in preview. Please download the full file."}
                                 </div>
                             )}
                         </div>

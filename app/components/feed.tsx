@@ -1,9 +1,12 @@
 'use client'
 import { useState } from 'react';
+import dynamic from 'next/dynamic';
 import { fetchSubmissions } from '@/app/actions/fetch-submissions';
 import VoteButton from './vote-button';
 import Link from 'next/link';
 import { Database } from '@/database.types';
+
+const PdfThumbnail = dynamic(() => import('./pdf-thumbnail'), { ssr: false });
 
 type Submission = Database['public']['Tables']['submissions']['Row'];
 
@@ -167,12 +170,35 @@ export default function Feed({ initialData }: { initialData: Submission[] }) {
                     ))}
                 </div>
             ) : data.length === 0 ? (
-                <div className="text-center font-mono p-12 border-2 border-black border-dashed bg-gray-50 brutal-shadow lg:my-20">
-                    <p className="text-xl mb-4 font-black uppercase">No records found matching your criteria.</p>
-                    <p className="text-sm mb-8 max-w-md mx-auto">The registry is built by the community. You can change the paradigm by submitting records for your jurisdiction.</p>
-                    <Link href="/upload" className="brutal-btn inline-block bg-white hover:bg-gray-50">
-                        SUBMIT RECORD
-                    </Link>
+                <div className="text-left font-mono p-8 md:p-12 border-4 border-black bg-gray-50 brutal-shadow lg:my-20 space-y-8">
+                    <div className="space-y-2">
+                        <p className="text-3xl font-black uppercase tracking-tighter leading-none italic">No records found Matching your criteria.</p>
+                        <p className="text-sm font-bold opacity-60 uppercase">The registry depends on citizen participation.</p>
+                    </div>
+
+                    <div className="grid md:grid-cols-3 gap-8 pt-4 border-t-2 border-black border-dashed">
+                        <div className="space-y-2">
+                            <span className="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase">Step 1</span>
+                            <h4 className="font-black uppercase tracking-tight">Locate Records</h4>
+                            <p className="text-xs leading-relaxed font-bold">Use our <Link href="/resources" className="underline">FOIA resources</Link> to legally request ALPR data or policy logs from your local agency.</p>
+                        </div>
+                        <div className="space-y-2">
+                            <span className="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase">Step 2</span>
+                            <h4 className="font-black uppercase tracking-tight">Verify Data</h4>
+                            <p className="text-xs leading-relaxed font-bold">Ensure the response is from an official source and contains the requested evidence.</p>
+                        </div>
+                        <div className="space-y-2">
+                            <span className="bg-black text-white px-2 py-0.5 text-[10px] font-black uppercase">Step 3</span>
+                            <h4 className="font-black uppercase tracking-tight">Submit & Index</h4>
+                            <p className="text-xs leading-relaxed font-bold">Upload the record to the registry. It will be permanently archived and mirrored.</p>
+                        </div>
+                    </div>
+
+                    <div className="pt-4">
+                        <Link href="/upload" className="brutal-btn inline-block bg-yellow-300 px-12 py-4 text-black font-black uppercase tracking-widest text-lg">
+                            SUBMIT FIRST RECORD
+                        </Link>
+                    </div>
                 </div>
             ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -195,10 +221,27 @@ export default function Feed({ initialData }: { initialData: Submission[] }) {
                                         />
                                         <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-10 transition-opacity"></div>
                                     </Link>
+                                ) : item.file_type === 'application/pdf' ? (
+                                    <Link href={`/view/${item.id}`} className="block mb-4 aspect-video bg-gray-50 border-2 border-black relative overflow-hidden">
+                                        <PdfThumbnail
+                                            url={item.file_url}
+                                            fallback={
+                                                <div className="w-full h-full flex flex-col items-center justify-center group-hover:bg-yellow-50 transition-colors">
+                                                    <div className="text-[40px] opacity-20 group-hover:opacity-40 transition-opacity">📄</div>
+                                                    <span className="font-mono text-[10px] font-black text-gray-400 mt-2 uppercase tracking-widest">PDF SOURCE</span>
+                                                    <div className="absolute inset-0 border-2 border-black m-2 border-dashed opacity-20"></div>
+                                                </div>
+                                            }
+                                        />
+                                    </Link>
                                 ) : (
-                                    <div className="mb-4 aspect-video bg-gray-100 border-2 border-black flex items-center justify-center border-dashed">
-                                        <span className="font-mono text-[10px] font-bold text-gray-400">NO PREVIEW</span>
-                                    </div>
+                                    <Link href={`/view/${item.id}`} className="block mb-4 aspect-video bg-gray-50 border-2 border-black flex flex-col items-center justify-center group-hover:bg-yellow-50 transition-colors relative overflow-hidden">
+                                        <div className="text-[40px] opacity-20 group-hover:opacity-40 transition-opacity">
+                                            {item.file_type.includes('pdf') ? '📄' : '📝'}
+                                        </div>
+                                        <span className="font-mono text-[10px] font-black text-gray-400 mt-2 uppercase tracking-widest">{item.file_type.split('/')[1] || 'FILE'} SOURCE</span>
+                                        <div className="absolute inset-0 border-2 border-black m-2 border-dashed opacity-20"></div>
+                                    </Link>
                                 )}
 
                                 <h3 className="font-black text-lg leading-none mb-2 line-clamp-2 min-h-[2.5rem] uppercase tracking-tighter">

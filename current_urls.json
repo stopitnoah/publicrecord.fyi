@@ -1,0 +1,56 @@
+(node:8252) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///C:/Users/noahf/Desktop/publicrecord.fyi/scripts/dump-urls.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to C:\Users\noahf\Desktop\publicrecord.fyi\package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[
+  {
+    "title": "Illegal Federal Data Sharing Report",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/1767114425678_il_cbp_violation.pdf",
+    "file_type": "application/pdf"
+  },
+  {
+    "title": "Police Chief Misuse Arrest Record",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/1767114425893_ga_chief_misuse.pdf",
+    "file_type": "application/pdf"
+  },
+  {
+    "title": "83,000 Camera Network Search Audit",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/1767114424811_tx_audit_83k.pdf",
+    "file_type": "application/pdf"
+  },
+  {
+    "title": "83,000 Camera Network Search Audit",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/VERIFIED_FOIA_1767114552770_tx_audit_83k.txt",
+    "file_type": "text/plain"
+  },
+  {
+    "title": "Illegal Federal Data Sharing Report",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/VERIFIED_FOIA_1767114553246_il_cbp_violation.txt",
+    "file_type": "text/plain"
+  },
+  {
+    "title": "Police Chief Misuse Arrest Record",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/VERIFIED_FOIA_1767114553551_ga_chief_misuse.txt",
+    "file_type": "text/plain"
+  },
+  {
+    "title": "Congressional Investigation: Flock Safety Reproductive Tracking",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/PROX_ARCHIVE_1767123778862_congress_letter_investigation.pdf",
+    "file_type": "application/pdf"
+  },
+  {
+    "title": "Audit Findings: National Data Sharing Violation",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/PROX_ARCHIVE_1767123779249_illinois_sos_audit_findings.txt",
+    "file_type": "text/plain"
+  },
+  {
+    "title": "Indictment: Perjury & Misuse of ALPR Systems",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/PROX_ARCHIVE_1767123779420_tx_sheriff_king_indictment.txt",
+    "file_type": "text/plain"
+  },
+  {
+    "title": "Braselton Police Chief Arrest Record",
+    "file_url": "https://jfmlqcerazcntbvzkuss.supabase.co/storage/v1/object/public/submissions/PROX_ARCHIVE_1767123779558_ga_gbi_steffman_arrest.txt",
+    "file_type": "text/plain"
+  }
+]

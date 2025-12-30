@@ -68,8 +68,11 @@ export default function AboutPage() {
                     <p>
                         The surveillance apparatus will never be dismantled while those in power are insulated from its effects. When officials experience the same loss of privacy they impose on citizens, the political calculus changes.
                     </p>
+                    <p className="font-black border-l-4 border-black pl-4 py-2 bg-yellow-50 lg:text-3xl tracking-tighter uppercase italic">
+                        If surveillance is mandatory for citizens, it is mandatory for officials. If it is unacceptable for officials, it must be dismantled for all.
+                    </p>
                     <p>
-                        This isn&apos;t about revenge or vindictiveness. It&apos;s about creating alignment. If surveillance is acceptable for innocent citizens, it&apos;s acceptable for public officials. If it&apos;s unacceptable for officials, it should be unacceptable for everyone.
+                        This isn&apos;t about revenge or vindictiveness. It&apos;s about creating alignment—what we call <strong>Mutual Privacy</strong>. If surveillance is acceptable for innocent citizens, it&apos;s acceptable for public officials. If it&apos;s unacceptable for officials, it should be unacceptable for everyone.
                     </p>
                     <p>
                         Public records are public records. This site doesn&apos;t hack, leak, or steal anything. We simply aggregate what government agencies have already deemed public information.

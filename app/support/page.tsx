@@ -1,12 +1,19 @@
 import { supabase } from '@/lib/supabase';
 import Image from 'next/image';
 import { getMoneroStats } from '../actions/get-monero-stats';
+import { createCheckoutSession } from '../actions/create-checkout-session';
 
 export const revalidate = 60;
 
 export default async function SupportPage() {
-    const stats = await getMoneroStats();
-    const displayAddress = stats.address === 'Not Configured'
+    let stats = { address: 'Not Configured', price: 0 };
+    try {
+        stats = await getMoneroStats();
+    } catch (e) {
+        console.error('SupportPage render error:', e);
+    }
+
+    const displayAddress = stats.address === 'Not Configured' || !stats.address || stats.address === 'N/A'
         ? '488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY'
         : stats.address;
 
@@ -35,9 +42,11 @@ export default async function SupportPage() {
                         </p>
 
                         <div className="space-y-4 mt-auto">
-                            <button className="w-full brutal-btn bg-black text-white text-center py-4 uppercase font-black tracking-widest hover:bg-gray-800 transition-colors">
-                                Pay with Card
-                            </button>
+                            <form action={createCheckoutSession}>
+                                <button type="submit" className="w-full brutal-btn bg-yellow-300 text-black text-center py-4 uppercase font-black tracking-widest hover:bg-yellow-400 transition-colors">
+                                    Pay with Card
+                                </button>
+                            </form>
                             <p className="text-[10px] font-mono text-gray-500 italic">
                                 * Payments processed via encrypted gateway.
                             </p>

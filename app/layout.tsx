@@ -52,11 +52,19 @@ export default function RootLayout({
               </div>
               <div>
                 <h3 className="font-black uppercase text-xl mb-4 italic underline decoration-4 underline-offset-4">Network</h3>
-                <p className="text-xs font-mono text-gray-500">
-                  v1.2.0-stable<br />
-                  Verified Mirrors: 12 active<br />
-                  Data Integrity: 100% SHA-1 Verified
-                </p>
+                <div className="space-y-4">
+                  <p className="text-xs font-mono text-gray-500">
+                    v1.2.0-stable<br />
+                    Verified Mirrors: 12 active<br />
+                    Data Integrity: 100% SHA-1 Verified
+                  </p>
+                  <Link
+                    href="/support"
+                    className="brutal-btn inline-block px-6 py-1 text-[10px] uppercase tracking-widest bg-yellow-300 font-black hover:bg-yellow-400"
+                  >
+                    SUPPORT
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="mt-12 pt-8 border-t border-black border-dotted flex justify-between items-center flex-wrap gap-4">

@@ -7,17 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "eject": "npx -y ts-node -O '{\"module\":\"CommonJS\"}' scripts/eject.ts"
+    "eject": "npx -y ts-node -O \"{\\\"module\\\":\\\"CommonJS\\\"}\" scripts/eject.ts",
+    "seed": "npx -y ts-node --transpile-only -O \"{\\\"module\\\":\\\"CommonJS\\\"}\" scripts/seed-data.ts"
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "^1.17.3",
+    "@stripe/stripe-js": "^8.6.0",
     "@supabase/supabase-js": "^2.89.0",
     "@types/papaparse": "^5.5.2",
     "next": "16.1.1",
     "papaparse": "^5.5.3",
     "react": "19.2.3",
     "react-dom": "19.2.3",
+    "react-pdf": "^10.2.0",
     "sharp": "^0.34.5",
+    "stripe": "^20.1.0",
     "tesseract.js": "^7.0.0"
   },
   "devDependencies": {

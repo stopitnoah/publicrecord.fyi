@@ -1,0 +1,21 @@
+
+> app@0.1.0 seed
+> npx -y ts-node -O '{"module":"CommonJS"}' scripts/seed-data.ts
+
+<anonymous_script>:1
+'{module:CommonJS}'
+^
+
+SyntaxError: Unexpected token ''', "'{module:CommonJS}'" is not valid JSON
+    at JSON.parse (<anonymous>)
+    at parse (C:\Users\noahf\AppData\Local\npm-cache\_npx\1bf7c3c15bf47d04\node_modules\ts-node\dist\util.js:52:45)
+    at arg (C:\Users\noahf\AppData\Local\npm-cache\_npx\1bf7c3c15bf47d04\node_modules\arg\index.js:122:24)
+    at parseArgv (C:\Users\noahf\AppData\Local\npm-cache\_npx\1bf7c3c15bf47d04\node_modules\ts-node\dist\bin.js:69:12)
+    at main (C:\Users\noahf\AppData\Local\npm-cache\_npx\1bf7c3c15bf47d04\node_modules\ts-node\dist\bin.js:25:18)
+    at Object.<anonymous> (C:\Users\noahf\AppData\Local\npm-cache\_npx\1bf7c3c15bf47d04\node_modules\ts-node\dist\bin.js:579:5)
+    at Module._compile (node:internal/modules/cjs/loader:1706:14)
+    at Object..js (node:internal/modules/cjs/loader:1839:10)
+    at Module.load (node:internal/modules/cjs/loader:1441:32)
+    at Function._load (node:internal/modules/cjs/loader:1263:12)
+
+Node.js v22.19.0

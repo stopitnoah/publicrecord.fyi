@@ -9,6 +9,28 @@ export default async function Home() {
 
     return (
         <div className="space-y-12">
+            {/* NEW HIGH-IMPACT HERO */}
+            <div className="bg-white border-4 border-black p-8 md:p-12 brutal-shadow flex flex-col items-center text-center space-y-6">
+                <h1 className="text-4xl md:text-7xl font-black uppercase tracking-tighter leading-none italic decoration-yellow-400 underline decoration-8 underline-offset-4">
+                    The Decentralized <br className="hidden md:block" /> Public Record Registry
+                </h1>
+                <p className="max-w-3xl text-lg md:text-2xl font-bold leading-relaxed italic border-l-4 border-black pl-4">
+                    A seizure-proof archive of verified public evidence. <br />
+                    <span className="bg-black text-white px-2 not-italic">Protecting transparency through permanent architecture.</span>
+                </p>
+                <div className="flex flex-wrap justify-center gap-4 pt-4">
+                    <a href="/upload" className="brutal-btn px-8 py-3 text-lg uppercase tracking-widest bg-yellow-300">
+                        Submit Evidence
+                    </a>
+                    <a href="#feed" className="brutal-btn px-8 py-3 text-lg uppercase tracking-widest bg-white">
+                        Explore Archive
+                    </a>
+                    <Link href="/resources" className="px-8 py-3 font-bold uppercase hover:underline border-2 border-black hover:bg-gray-100 flex items-center">
+                        FOIA Templates
+                    </Link>
+                </div>
+            </div>
+
             {/* Resilience Marquee */}
             <div className="bg-black text-white py-1 overflow-hidden whitespace-nowrap border-t-2 border-b-2 border-black">
                 <div className="animate-marquee inline-block font-mono text-[10px] font-bold uppercase tracking-widest">
@@ -16,12 +38,13 @@ export default async function Home() {
                     TRIPLE REDUNDANCY ACTIVE: CLOUD (SUPABASE) • P2P (BITTORRENT) • DECENTRALIZED (IPFS) • SEIZURE-PROOF ARCHITECTURE ENABLED • FORKABLE METADATA • OPEN SOURCE INDEPENDENCE •
                 </div>
             </div>
+
             {/* Washington Ruling Banner */}
             <div className="bg-yellow-300 border-4 border-black p-4 flex flex-col md:flex-row items-center justify-between gap-4 brutal-shadow">
                 <div className="flex items-center gap-3">
                     <span className="text-3xl">⚖️</span>
                     <p className="font-bold text-sm md:text-base">
-                        <strong>Legal Precedent:</strong> Washington State court ruled ALPR data = public records (Nov 2024)
+                        <strong className="uppercase">Legal Precedent:</strong> Washington State court ruled ALPR data = public records (Nov 2024)
                     </p>
                 </div>
                 <Link href="/resources" className="text-xs font-bold underline shrink-0 hover:text-gray-700">
@@ -29,46 +52,41 @@ export default async function Home() {
                 </Link>
             </div>
 
-            {/* Hero with Greenwald Quote */}
-            <div className="border-2 border-black p-6 md:p-10 brutal-shadow bg-white relative overflow-hidden">
+            {/* Greenwald Quote Section */}
+            <div className="border-2 border-black p-6 md:p-10 brutal-shadow bg-gray-50 relative overflow-hidden">
                 <blockquote className="text-xl md:text-2xl lg:text-3xl font-serif italic leading-relaxed max-w-3xl mb-6">
                     &quot;We are supposed to know nearly everything about them. That is why they are called <strong className="not-italic">public servants</strong>.<br /><br />
                     They on the other hand are supposed to know nearly nothing about us. That is why we are called <strong className="not-italic">private citizens</strong>.&quot;
                 </blockquote>
                 <p className="font-mono text-sm text-gray-600 mb-8">— Glenn Greenwald</p>
-
-                <p className="text-lg font-bold mb-8 max-w-2xl">
-                    publicrecord.fyi <span className="bg-black text-white px-2">inverts the surveillance paradigm.</span>
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                    <a href="/upload" className="brutal-btn text-center uppercase tracking-widest">
-                        Submit Record
-                    </a>
-                    <a href="/resources" className="px-4 py-2 font-bold hover:underline self-center uppercase text-sm border-2 border-black hover:bg-gray-100">
-                        FOIA Templates
-                    </a>
-                </div>
             </div>
 
-            {/* It's Working Section */}
-            <div className="border-2 border-black p-6 md:p-8 bg-green-50 space-y-4">
+            {/* It's Working Section (Proof) */}
+            <div className="border-2 border-black p-6 md:p-8 bg-green-50 space-y-4 brutal-shadow">
                 <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                    <span>✓</span> It&apos;s Working
+                    <span>✓</span> Proof of Impact
                 </h2>
-                <p className="font-medium leading-relaxed">
-                    After Washington&apos;s court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could track public officials.
-                </p>
-                <blockquote className="border-l-4 border-black pl-4 italic text-gray-700">
-                    &quot;I thought if you weren&apos;t doing anything wrong, you didn&apos;t have to worry about who was watching you. I guess that only applies to private citizens.&quot;
-                </blockquote>
-                <p className="text-sm font-bold">Your submissions create accountability pressure.</p>
+                <div className="grid md:grid-cols-2 gap-8 items-center">
+                    <p className="font-medium leading-relaxed">
+                        After the Washington court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could now track his department&apos;s movements as easily as they tracked theirs.
+                    </p>
+                    <div className="border-l-4 border-black pl-6 space-y-4">
+                        <blockquote className="italic text-gray-700 border-b border-black border-dotted pb-2">
+                            &quot;I thought if you weren&apos;t doing anything wrong, you didn&apos;t have to worry about who was watching you. I guess that only applies to private citizens.&quot;
+                        </blockquote>
+                        <p className="text-sm font-bold uppercase tracking-tighter">Radical transparency forces accountability.</p>
+                    </div>
+                </div>
             </div>
 
             {/* Feed */}
             <div id="feed" className="pt-8">
                 <div className="flex justify-between items-end mb-8 border-b-4 border-black pb-2">
-                    <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter">Recent Submissions</h3>
-                    <span className="font-mono text-xs md:text-sm animate-pulse">● LIVE</span>
+                    <div className="space-y-1">
+                        <p className="text-[10px] font-black uppercase text-gray-400">The Registry</p>
+                        <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tighter">Recent Submissions</h3>
+                    </div>
+                    <span className="font-mono text-xs md:text-sm animate-pulse">● LIVE DATASTREAM</span>
                 </div>
                 <Feed initialData={initialData} />
             </div>

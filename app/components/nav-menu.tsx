@@ -37,7 +37,7 @@ export default function NavMenu() {
                         </svg>
                         GitHub
                     </a>
-                    <Link href="/upload" className="brutal-btn px-4 py-1 text-sm uppercase">Submit</Link>
+                    <Link href="/upload" className="brutal-btn px-4 py-1 text-sm uppercase bg-yellow-300">Submit</Link>
                 </div>
 
                 {/* Mobile Menu Toggle (Right) */}

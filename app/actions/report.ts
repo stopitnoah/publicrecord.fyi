@@ -3,7 +3,7 @@ import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
 
 export async function reportSubmission(id: string) {
-    const { error } = await supabase.rpc('increment_report_count', { row_id: id });
+    const { error } = await (supabase as any).rpc('increment_report_count', { row_id: id });
 
     if (error) {
         // Fallback if RPC fails (Note: this still requires RLS permissions to update)

@@ -182,7 +182,7 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     }
 
     // 5. Insert Record
-    const { data: insertData, error: insertError } = await (supabase
+    const { data: insertData, error: insertError } = await supabase
         .from('submissions')
         .insert({
             official_name,
@@ -198,7 +198,7 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
             ipfs_cid: ipfsCid,
             thumbnail_url: thumbnailUrl,
             extracted_text: extractedText
-        } as any) as any)
+        })
         .select()
         .single();
 

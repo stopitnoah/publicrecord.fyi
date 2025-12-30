@@ -8,5 +8,5 @@ if (!supabaseUrl || !supabaseAnonKey) { // Updated condition to use supabaseAnon
     console.warn('Missing Supabase environment variables');
 }
 
-// @ts-expect-error - Supabase singleton
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+// Supabase client singleton
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);

@@ -18,6 +18,14 @@ export default async function NetworkPage() {
 
     return (
         <div className="max-w-4xl mx-auto py-12 space-y-16 font-mono">
+            {/* Resilience Marquee */}
+            <div className="bg-black text-white py-2 overflow-hidden whitespace-nowrap border-4 border-black brutal-shadow-white">
+                <div className="animate-marquee inline-block font-mono text-xs font-bold uppercase tracking-widest">
+                    TRIPLE REDUNDANCY ACTIVE: CLOUD (SUPABASE) • P2P (BITTORRENT) • DECENTRALIZED (IPFS) • SEIZURE-PROOF ARCHITECTURE ENABLED • FORKABLE METADATA • OPEN SOURCE INDEPENDENCE •
+                    TRIPLE REDUNDANCY ACTIVE: CLOUD (SUPABASE) • P2P (BITTORRENT) • DECENTRALIZED (IPFS) • SEIZURE-PROOF ARCHITECTURE ENABLED • FORKABLE METADATA • OPEN SOURCE INDEPENDENCE •
+                </div>
+            </div>
+
             {/* Header */}
             <section className="bg-black text-white p-8 border-4 border-black brutal-shadow-white">
                 <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">Network Resilience</h1>

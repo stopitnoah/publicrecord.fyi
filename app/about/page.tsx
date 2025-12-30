@@ -20,20 +20,82 @@ export default function AboutPage() {
                 <p className="font-mono text-sm text-gray-600">— Glenn Greenwald</p>
             </div>
 
-            {/* The Problem */}
+            {/* What are ALPRs */}
             <section className="space-y-6">
-                <h2 className="text-3xl font-black uppercase tracking-tight">The Problem</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight">What are ALPRs?</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4">
                     <p>
-                        I&apos;ve been online since I was 7 years old—far before I could comprehend or consent to what that meant.
-                        Every click, every search, every awkward moment of growing up: captured, stored, analyzed. My privacy has been effectively violated my entire life by surveillance systems I never agreed to and couldn&apos;t escape.
+                        Automated License Plate Readers (ALPRs) are AI-powered cameras that capture and analyze images of all passing vehicles, storing details like your car&apos;s location, date, and time.
                     </p>
                     <p>
-                        Automatic License Plate Reader (ALPR) systems are just one piece of this apparatus. They photograph every license plate that passes by, creating a detailed map of everyone&apos;s movements. This data gets stored for months or years. It tracks where you go, when you go there, and who you&apos;re with.
+                        They also capture your car&apos;s <span className="highlight-text bg-yellow-100 px-1 font-bold">make, model, color, and identifying features</span> such as dents, roof racks, and bumper stickers, turning these into searchable data points.
                     </p>
-                    <p className="font-bold border-l-4 border-black pl-4 py-2 bg-gray-50">
-                        This surveillance doesn&apos;t make us safer. It makes us monitored.
+                    <div className="bg-gray-50 p-6 border-l-4 border-black">
+                        <p className="text-sm font-bold uppercase tracking-widest mb-2">The Loophole</p>
+                        <p>
+                            These systems are marketed as tools to fight crime, but they ignore the powerful tools police already have (like warrants). Instead, they create a loophole: <strong>mass surveillance without a warrant.</strong>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            {/* The Dangers */}
+            <section className="space-y-8">
+                <h2 className="text-3xl font-black uppercase tracking-tight">The Dangers</h2>
+
+                <div className="grid md:grid-cols-3 gap-6">
+                    <div className="border-4 border-black p-4 bg-red-50 space-y-2">
+                        <div className="text-2xl">👁️</div>
+                        <h3 className="font-black uppercase">Privacy Violations</h3>
+                        <p className="text-sm leading-snug">
+                            ALPRs track your movements and store your data for long periods, creating a detailed record of your location history.
+                        </p>
+                    </div>
+
+                    <div className="border-4 border-black p-4 bg-white space-y-2">
+                        <div className="text-2xl">⚠️</div>
+                        <h3 className="font-black uppercase">Risk of Misuse</h3>
+                        <p className="text-sm leading-snug">
+                            Data from ALPRs has led to wrongful arrests, profiling, and stalking of ex-partners by police officers.
+                        </p>
+                    </div>
+
+                    <div className="border-4 border-black p-4 bg-gray-50 space-y-2">
+                        <div className="text-2xl">📉</div>
+                        <h3 className="font-black uppercase">Limited Benefits</h3>
+                        <p className="text-sm leading-snug">
+                            There&apos;s no substantial evidence that ALPRs effectively prevent crime, despite unethical vendor claims.
+                        </p>
+                    </div>
+                </div>
+
+                <div className="prose-lg font-medium leading-relaxed bg-black text-white p-6 border-4 border-black brutal-shadow-white">
+                    <p className="leading-relaxed">
+                        <span className="text-yellow-300 font-bold uppercase">"Your driving history is rarely confined..."</span>
+                        <br />
+                        It&apos;s typically shared with thousands of other agencies nationwide (secretly). Once the data is out of your community, you have no control over how it&apos;s used.
                     </p>
+                </div>
+            </section>
+
+            {/* What is Flock? */}
+            <section className="space-y-6">
+                <h2 className="text-3xl font-black uppercase tracking-tight">What is Flock?</h2>
+                <div className="prose-lg font-medium leading-relaxed space-y-4">
+                    <p>
+                        Flock Safety is one of the largest ALPR vendors in the US. Their cameras are installed for police, businesses, and HOAs. Captured data is uploaded to Flock&apos;s cloud, where participating agencies can search and share information across jurisdictions.
+                    </p>
+
+                    <div className="border-4 border-red-600 p-6 bg-red-50 relative mt-8">
+                        <div className="absolute -top-3 left-4 bg-red-600 text-white px-2 py-0.5 text-[10px] font-black uppercase">Critical Warning</div>
+                        <h3 className="font-black uppercase text-xl mb-2 text-red-900">Similar Sites are Disappearing</h3>
+                        <p className="text-red-900 font-medium">
+                            Following takedown claims submitted on behalf of Flock, sites similar to <a href="https://deflock.me" className="underline font-bold">DeFlock</a> have gone offline.
+                        </p>
+                        <p className="text-red-900 font-black mt-2 italic">
+                            If DeFlock disappears, it&apos;s clear why.
+                        </p>
+                    </div>
                 </div>
             </section>
 

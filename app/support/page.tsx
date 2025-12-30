@@ -42,9 +42,21 @@ export default async function SupportPage() {
                         </p>
 
                         <div className="space-y-4 mt-auto">
-                            <form action={createCheckoutSession}>
+                            <form action={createCheckoutSession} className="space-y-4">
+                                <div>
+                                    <label htmlFor="amount" className="block text-xs font-bold uppercase tracking-widest mb-1">Custom Amount ($)</label>
+                                    <input
+                                        type="number"
+                                        name="amount"
+                                        id="amount"
+                                        defaultValue="10"
+                                        min="1"
+                                        step="1"
+                                        className="w-full border-2 border-black p-2 font-mono text-lg focus:outline-none focus:bg-yellow-50"
+                                    />
+                                </div>
                                 <button type="submit" className="w-full brutal-btn bg-yellow-300 text-black text-center py-4 uppercase font-black tracking-widest hover:bg-yellow-400 transition-colors">
-                                    Pay with Card
+                                    Proceed to Payment
                                 </button>
                             </form>
                             <p className="text-[10px] font-mono text-gray-500 italic">

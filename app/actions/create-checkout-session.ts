@@ -3,12 +3,20 @@
 import Stripe from 'stripe';
 import { redirect } from 'next/navigation';
 
-export async function createCheckoutSession() {
+export async function createCheckoutSession(formData: FormData) {
     const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
     if (!stripeSecretKey) {
         console.error('STRIPE_SECRET_KEY is missing');
         throw new Error('STRIPE_SECRET_KEY is not configured');
+    }
+
+    const amountRaw = formData.get('amount');
+    const amount = amountRaw ? parseFloat(amountRaw.toString()) : 10;
+
+    // Ensure minimum donation is $1
+    if (isNaN(amount) || amount < 1) {
+        throw new Error('Invalid donation amount');
     }
 
     const stripe = new Stripe(stripeSecretKey);
@@ -23,7 +31,7 @@ export async function createCheckoutSession() {
                         name: 'PublicRecord.fyi Mission Support',
                         description: 'Help us maintain decentralized, seizure-proof infrastructure for public records.',
                     },
-                    unit_amount: 1000,
+                    unit_amount: Math.round(amount * 100), // Convert to cents
                 },
                 quantity: 1,
             },

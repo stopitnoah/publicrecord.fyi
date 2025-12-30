@@ -41,7 +41,7 @@ export default async function Home() {
                 <div className="bg-black text-white border-4 border-black p-6 brutal-shadow-white space-y-2">
                     <p className="text-6xl font-black text-yellow-300 leading-none tracking-tighter italic">1 : 521</p>
                     <p className="text-xs font-bold uppercase tracking-widest">Search Ratio</p>
-                    <p className="text-sm font-medium opacity-80 leading-snug">For every 1 local law enforcement search, his data is queried 521 times on the national network.</p>
+                    <p className="text-sm font-medium opacity-80 leading-snug">For every 1 legitimate search, this system generates 521 automated tracking records on innocent drivers.</p>
                 </div>
                 <div className="bg-white border-4 border-black p-6 brutal-shadow space-y-2">
                     <p className="text-6xl font-black leading-none tracking-tighter italic italic underline decoration-yellow-400 decoration-8 underline-offset-4">92,000+</p>

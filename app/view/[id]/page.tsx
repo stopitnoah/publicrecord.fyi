@@ -223,6 +223,13 @@ export default async function ViewPage({ params }: Props) {
                             </p>
 
                             <div className="space-y-4">
+                                <div className="space-y-2">
+                                    <p className="text-[10px] font-black uppercase text-yellow-500">Magnet Identifier</p>
+                                    <div className="bg-gray-900 border border-gray-700 p-2 font-mono text-[10px] break-all text-gray-400 select-all max-h-24 overflow-y-auto">
+                                        {data.magnet_uri}
+                                    </div>
+                                </div>
+
                                 <MagnetCaptureButton uri={data.magnet_uri} />
 
                                 {data.ipfs_cid && (

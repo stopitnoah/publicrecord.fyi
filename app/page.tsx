@@ -1,5 +1,6 @@
 import Feed from './components/feed';
 import { fetchSubmissions } from './actions/fetch-submissions';
+import { supabase } from '@/lib/supabase';
 import Link from 'next/link';
 
 export const revalidate = 60;
@@ -60,6 +61,21 @@ export default async function Home() {
                         <p className="text-sm font-bold uppercase tracking-tighter">Radical transparency forces accountability.</p>
                     </div>
                 </div>
+            </div>
+
+            {/* Support CTA */}
+            <div className="bg-black text-white border-4 border-black p-8 md:p-12 brutal-shadow-white flex flex-col md:flex-row items-center justify-between gap-8">
+                <div className="space-y-4 max-w-2xl">
+                    <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter italic decoration-yellow-400 underline decoration-4 underline-offset-4">
+                        Support the Mission
+                    </h2>
+                    <p className="font-bold text-gray-300">
+                        Help us maintain the global redundancy swarm. Your contributions fund decentralized hosting, IPFS pinning, and BitTorrent tracking to ensure these records remain permanent.
+                    </p>
+                </div>
+                <Link href="/support" className="brutal-btn px-10 py-5 text-xl uppercase tracking-widest bg-yellow-300 text-black hover:bg-yellow-400 shrink-0 whitespace-nowrap">
+                    Contribute Now
+                </Link>
             </div>
 
             {/* Feed */}

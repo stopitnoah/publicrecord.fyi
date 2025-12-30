@@ -1,4 +1,5 @@
 import { supabase } from '@/lib/supabase';
+import Link from 'next/link';
 
 export const revalidate = 60;
 
@@ -29,7 +30,7 @@ export default async function NetworkPage() {
             {/* Header */}
             <section className="bg-black text-white p-8 border-4 border-black brutal-shadow-white">
                 <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-4">Network Resilience</h1>
-                <p className="text-lg font-bold">Protocol Status: STABLE • 12 Active Mirrors • Seizure-Proof Architecture</p>
+                <p className="text-lg font-bold">Protocol Status: STABLE • Network Peering Active • Seizure-Proof Architecture</p>
             </section>
 
             {/* Technical Architecture */}
@@ -89,7 +90,7 @@ export default async function NetworkPage() {
                 <h2 className="text-3xl font-black uppercase border-b-4 border-black pb-2">Survival Protocols</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4 font-sans">
                     <p>
-                        publicrecord.fyi is designed to survive its creator. If this domain is seized or the gateway goes dark, use these protocols to access and redeploy the archive.
+                        publicrecord.fyi is designed to survive its creator. If this domain is seized or the gateway goes dark, use the <Link href="/emergency" className="underline font-black text-red-600 hover:bg-black hover:text-white transition-colors px-1">Emergency Protocols</Link> to access and redeploy the archive.
                     </p>
                 </div>
 
@@ -99,7 +100,7 @@ export default async function NetworkPage() {
                             <h3 className="font-black uppercase mb-2">1. The Repository</h3>
                             <p className="text-sm mb-4">The code is open-source. Clone it now to ensure you have a copy of the infrastructure.</p>
                             <code className="text-xs bg-black text-white p-2 block break-all">
-                                git clone https://github.com/publicrecord-fyi/registry.git
+                                git clone https://github.com/stopitnoah/publicrecord.fyi.git
                             </code>
                         </div>
 

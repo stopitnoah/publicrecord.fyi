@@ -19,7 +19,7 @@ export default function TermsPage() {
 
                 <h3 className="text-lg font-bold uppercase mt-4">3. Disclaimer</h3>
                 <p>
-                    We do not guarantee the accuracy of user-submitted content. All records are provided "as is".
+                    We do not guarantee the accuracy of user-submitted content. All records are provided &quot;as is&quot;.
                     We are not responsible for how this data is used.
                 </p>
             </div>

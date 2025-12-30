@@ -7,9 +7,9 @@ export default function MoneroTicker() {
             <div className="flex justify-center">
                 <Link
                     href="/support"
-                    className="brutal-btn px-8 py-2 text-xs uppercase tracking-widest bg-yellow-300 font-black"
+                    className="brutal-btn px-8 py-2 text-xs uppercase tracking-widest bg-yellow-300 font-black hover:bg-yellow-400"
                 >
-                    Support The Mission (XMR / CC)
+                    SUPPORT
                 </Link>
             </div>
         </div>

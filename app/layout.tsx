@@ -47,6 +47,7 @@ export default function RootLayout({
                   <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
                   <li><Link href="/network" className="hover:underline">Network Status</Link></li>
                   <li><Link href="/resources" className="hover:underline">FOIA Resources</Link></li>
+                  <li><a href="https://github.com/stopitnoah/publicrecord.fyi" target="_blank" rel="noopener noreferrer" className="hover:underline">Source Code</a></li>
                 </ul>
               </div>
               <div>

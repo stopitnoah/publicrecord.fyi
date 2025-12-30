@@ -22,7 +22,7 @@ export default async function Home() {
                     <a href="/upload" className="brutal-btn px-8 py-3 text-lg uppercase tracking-widest bg-yellow-300">
                         Submit Evidence
                     </a>
-                    <a href="#feed" className="BRUTAL-btn px-8 py-3 text-lg uppercase tracking-widest bg-white">
+                    <a href="#feed" className="brutal-btn px-8 py-3 text-lg uppercase tracking-widest bg-white">
                         Explore Archive
                     </a>
                     <Link href="/resources" className="px-8 py-3 font-bold uppercase hover:underline border-2 border-black hover:bg-gray-100 flex items-center">

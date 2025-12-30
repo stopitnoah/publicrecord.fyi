@@ -95,5 +95,38 @@ export interface Database {
                 }
             }
         }
+        Views: {
+            [_ in never]: never
+        }
+        Functions: {
+            increment_view_count: {
+                Args: {
+                    row_id: string
+                }
+                Returns: void
+            }
+            increment_report_count: {
+                Args: {
+                    row_id: string
+                }
+                Returns: void
+            }
+            increment_download_count: {
+                Args: {
+                    row_id: string
+                }
+                Returns: void
+            }
+            vote_submission: {
+                Args: {
+                    sub_id: string
+                    fp: string
+                }
+                Returns: void
+            }
+        }
+        Enums: {
+            [_ in never]: never
+        }
     }
 }

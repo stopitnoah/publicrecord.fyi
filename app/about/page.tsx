@@ -51,7 +51,7 @@ export default function AboutPage() {
                         publicrecord.fyi crowdsources and aggregates these public records. If a city council member votes to expand ALPR networks, their own movements become part of the public database. If a police chief oversees surveillance infrastructure, their vehicle&apos;s location history is a public record.
                     </p>
                     <div className="pt-4">
-                        <Link href="/resources" className="brutal-btn uppercase tracking-widest text-sm">
+                        <Link href="/resources" className="brutal-btn uppercase tracking-widest text-sm bg-white hover:bg-gray-50">
                             View FOIA Resources &amp; Legal Basis
                         </Link>
                     </div>

@@ -170,7 +170,7 @@ export default function Feed({ initialData }: { initialData: Submission[] }) {
                 <div className="text-center font-mono p-12 border-2 border-black border-dashed bg-gray-50 brutal-shadow lg:my-20">
                     <p className="text-xl mb-4 font-black uppercase">No records found matching your criteria.</p>
                     <p className="text-sm mb-8 max-w-md mx-auto">The registry is built by the community. You can change the paradigm by submitting records for your jurisdiction.</p>
-                    <Link href="/upload" className="brutal-btn inline-block">
+                    <Link href="/upload" className="brutal-btn inline-block bg-white hover:bg-gray-50">
                         SUBMIT RECORD
                     </Link>
                 </div>
@@ -224,7 +224,7 @@ export default function Feed({ initialData }: { initialData: Submission[] }) {
 
             {!loading && hasMore && (
                 <div className="text-center pt-12 pb-12">
-                    <button onClick={loadMore} className="brutal-btn w-full md:w-auto px-12">
+                    <button onClick={loadMore} className="brutal-btn w-full md:w-auto px-12 bg-white hover:bg-gray-50">
                         LOAD MORE RECORDS
                     </button>
                 </div>

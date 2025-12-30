@@ -221,7 +221,7 @@ export default function UploadForm() {
                 <button
                     disabled={isPending || !captchaToken}
                     type="submit"
-                    className="brutal-btn w-full md:w-auto px-12 py-6 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-lg group relative overflow-hidden"
+                    className="brutal-btn w-full md:w-auto px-12 py-6 disabled:opacity-50 disabled:cursor-not-allowed uppercase tracking-widest text-lg group relative overflow-hidden bg-yellow-300 hover:bg-yellow-400"
                 >
                     <span className="relative z-10">{isPending ? 'INDEXING...' : 'ARCHIVE RECORD'}</span>
                     {isPending && (

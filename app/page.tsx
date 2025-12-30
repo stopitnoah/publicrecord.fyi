@@ -32,8 +32,8 @@ export default async function Home() {
             {/* Hero with Greenwald Quote */}
             <div className="border-2 border-black p-6 md:p-10 brutal-shadow bg-white relative overflow-hidden">
                 <blockquote className="text-xl md:text-2xl lg:text-3xl font-serif italic leading-relaxed max-w-3xl mb-6">
-                    "We are supposed to know nearly everything about them. That is why they are called <strong className="not-italic">public servants</strong>.<br /><br />
-                    They on the other hand are supposed to know nearly nothing about us. That is why we are called <strong className="not-italic">private citizens</strong>."
+                    &quot;We are supposed to know nearly everything about them. That is why they are called <strong className="not-italic">public servants</strong>.<br /><br />
+                    They on the other hand are supposed to know nearly nothing about us. That is why we are called <strong className="not-italic">private citizens</strong>.&quot;
                 </blockquote>
                 <p className="font-mono text-sm text-gray-600 mb-8">— Glenn Greenwald</p>
 
@@ -53,13 +53,13 @@ export default async function Home() {
             {/* It's Working Section */}
             <div className="border-2 border-black p-6 md:p-8 bg-green-50 space-y-4">
                 <h2 className="text-2xl font-black uppercase tracking-tight flex items-center gap-2">
-                    <span>✓</span> It's Working
+                    <span>✓</span> It&apos;s Working
                 </h2>
                 <p className="font-medium leading-relaxed">
-                    After Washington's court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could track public officials.
+                    After Washington&apos;s court ruling, a county sheriff <strong>IMMEDIATELY pulled the plug on all Flock cameras</strong> when he realized citizens could track public officials.
                 </p>
                 <blockquote className="border-l-4 border-black pl-4 italic text-gray-700">
-                    "I thought if you weren't doing anything wrong, you didn't have to worry about who was watching you. I guess that only applies to private citizens."
+                    &quot;I thought if you weren&apos;t doing anything wrong, you didn&apos;t have to worry about who was watching you. I guess that only applies to private citizens.&quot;
                 </blockquote>
                 <p className="text-sm font-bold">Your submissions create accountability pressure.</p>
             </div>

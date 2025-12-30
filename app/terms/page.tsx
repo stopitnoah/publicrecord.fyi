@@ -12,7 +12,9 @@ export default function TermsPage() {
                 <h3 className="text-lg font-bold uppercase mt-4">2. Submissions</h3>
                 <p>
                     You agree not to upload content that is illegal, contains malware, or violates the privacy of private individuals unrelated to public interest (e.g. do not upload private license plate logs unless they demonstrate broad surveillance patterns).
-                    You grant publicrecord.fyi a perpetual, irrevocable license to host and display your submissions.
+                </p>
+                <p>
+                    By submitting content, you grant publicrecord.fyi a perpetual, irrevocable, worldwide, royalty-free license to host, store, use, display, reproduce, and distribute such content as part of the public registry. You understand that this site is designed for maximal &quot;survival&quot; and content may be mirrored across decentralized networks.
                 </p>
 
                 <h3 className="text-lg font-bold uppercase mt-4">3. Disclaimer</h3>

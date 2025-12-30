@@ -2,7 +2,6 @@
 
 import { supabase } from '@/lib/supabase';
 import { getFingerprint } from '@/lib/fingerprint';
-import { redirect } from 'next/navigation';
 import crypto from 'crypto';
 import sharp from 'sharp';
 import { createWorker } from 'tesseract.js';
@@ -15,6 +14,7 @@ export type FormState = {
     success: boolean;
     message: string;
     errors?: Record<string, string[]>;
+    debug?: string[];
 }
 
 export async function submitRecord(prevState: FormState, formData: FormData): Promise<FormState> {
@@ -27,10 +27,11 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const category = formData.get('category') as string || 'general';
     const captchaToken = formData.get('h-captcha-response') as string;
 
+    const debugLogs: string[] = [];
+
     // 1. Validate Captcha
     if (!HCAPTCHA_SECRET) {
         console.warn("HCAPTCHA_SECRET missing");
-        // Allow in dev if missing? No, failing secure.
         return { success: false, message: 'Server configuration error (Captcha)' };
     }
 
@@ -61,7 +62,6 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const fingerprint = await getFingerprint();
     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
 
-    // Note: If exact count is slow, this might be a bottleneck, but for MVP it's fine.
     const { count, error: countError } = await supabase
         .from('submissions')
         .select('*', { count: 'exact', head: true })
@@ -78,7 +78,6 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const fileExt = file.name.split('.').pop();
     if (!fileExt) return { success: false, message: 'Invalid file extension' };
 
-    // Sanitize filename
     const safeName = Math.random().toString(36).substring(2, 15) + '_' + Date.now() + '.' + fileExt;
 
     // Generate Magnet Link
@@ -92,7 +91,7 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     ].map(t => `&tr=${encodeURIComponent(t)}`).join('');
     const magnetUri = `magnet:?xt=urn:btih:${hash}&dn=${encodeURIComponent(file.name)}${trackers}`;
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
         .from('submissions')
         .upload(safeName, file);
 
@@ -104,37 +103,46 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
     const publicUrl = publicUrlResult.data.publicUrl;
 
     // 4.5. Pin to IPFS (Pinata)
-    let ipfsCid = null;
+    let ipfsCid: string | null = null;
     const pinataJwt = process.env.PINATA_JWT;
     if (pinataJwt) {
         try {
             const formDataPinata = new FormData();
             formDataPinata.append('file', file);
 
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+
             const pinataRes = await fetch('https://api.pinata.cloud/pinning/pinFileToIPFS', {
                 method: 'POST',
                 headers: {
                     Authorization: `Bearer ${pinataJwt}`
                 },
-                body: formDataPinata
+                body: formDataPinata,
+                signal: controller.signal
             });
+            clearTimeout(timeout);
 
             if (pinataRes.ok) {
                 const pinataJson = await pinataRes.json();
                 ipfsCid = pinataJson.IpfsHash;
+                debugLogs.push("IPFS: Pinned successfully");
             } else {
                 console.error('Pinata upload failed', await pinataRes.text());
+                debugLogs.push("IPFS: External pinning failed");
             }
         } catch (e) {
             console.error('IPFS Pinning error', e);
+            debugLogs.push("IPFS: Connection error or timeout");
         }
+    } else {
+        debugLogs.push("IPFS: Skipping (No API key)");
     }
 
-    // 4.6. Generate Thumbnail (Images only for now)
-    let thumbnailUrl = null;
+    // 4.6. Generate Thumbnail (Images only)
+    let thumbnailUrl: string | null = null;
     if (file.type.startsWith('image/')) {
         try {
-            const buffer = Buffer.from(await file.arrayBuffer());
             const thumbBuffer = await sharp(buffer)
                 .resize(600, 600, { fit: 'inside', withoutEnlargement: true })
                 .jpeg({ quality: 80 })
@@ -147,30 +155,34 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
 
             if (!thumbUploadError) {
                 thumbnailUrl = supabase.storage.from('submissions').getPublicUrl(thumbName).data.publicUrl;
+                debugLogs.push("Image: Thumbnail generated");
             } else {
                 console.error('Thumbnail upload failed', thumbUploadError);
+                debugLogs.push("Image: Thumbnail upload failed");
             }
         } catch (e) {
             console.error('Thumbnail generation error', e);
+            debugLogs.push("Image: Sharp processing error");
         }
     }
 
     // 4.7. OCR Processing (Images only)
-    let extractedText = null;
+    let extractedText: string | null = null;
     if (file.type.startsWith('image/')) {
         try {
-            const buffer = Buffer.from(await file.arrayBuffer());
             const worker = await createWorker('eng');
             const { data: { text } } = await worker.recognize(buffer);
             extractedText = text;
             await worker.terminate();
+            debugLogs.push("Image: OCR processing complete");
         } catch (e) {
             console.error('OCR processing error', e);
+            debugLogs.push("Image: OCR failed");
         }
     }
 
     // 5. Insert Record
-    const { data: insertData, error: insertError } = await supabase
+    const { data: insertData, error: insertError } = await (supabase
         .from('submissions')
         .insert({
             official_name,
@@ -186,16 +198,22 @@ export async function submitRecord(prevState: FormState, formData: FormData): Pr
             ipfs_cid: ipfsCid,
             thumbnail_url: thumbnailUrl,
             extracted_text: extractedText
-        })
+        } as any) as any)
         .select()
         .single();
 
     if (insertError) {
-        // Cleanup file if insert fails? (Optional but good practice).
         await supabase.storage.from('submissions').remove([safeName]);
-        return { success: false, message: 'Database insert failed: ' + insertError.message };
+        return { success: false, message: 'Database insert failed: ' + insertError.message, debug: debugLogs };
     }
 
-    redirect(`/view/${insertData.id}`);
-    // Redirect throws, so code below is unreachable
+    return {
+        success: true,
+        message: 'Record verified and archived',
+        debug: debugLogs,
+        // Next.js redirect doesn't work in useActionState sometimes, so we'll handle it in the component if needed
+        // but traditionally we'd redirect here.
+        // We'll return the ID so the client can redirect if success.
+        errors: { redirectId: [insertData.id] }
+    };
 }

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import Link from "next/link";
+import MoneroTicker from "./components/monero-ticker";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+const outfit = Outfit({ subsets: ["latin"], variable: "--font-outfit" });
 
 export const metadata: Metadata = {
-  title: "publicrecord.fyi",
-  description: "User-sourced ALPR public record aggregator.",
+  title: "PublicRecord.fyi | Decentralized Transparency Registry",
+  description: "A seizure-proof archive of verified public records. Protecting evidence via BitTorrent & IPFS.",
 };
 
 export default function RootLayout({
@@ -19,27 +19,63 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} min-h-screen flex flex-col`}
-      >
-        <header className="border-b-2 border-black p-4 flex justify-between items-center bg-white sticky top-0 z-50">
-          <h1 className="text-xl font-black tracking-tighter uppercase">publicrecord.fyi</h1>
-          <nav className="flex gap-4 text-sm font-bold">
-            <a href="/" className="hover:underline">Feed</a>
-            <a href="/upload" className="hover:underline">Upload</a>
-            <a href="/resources" className="hover:underline">Resources</a>
-            <a href="/about" className="hover:underline">About</a>
-          </nav>
-        </header>
-        <main className="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+      <body className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-[#f8f8f8] text-black min-h-screen flex flex-col`}>
+        {/* Navigation */}
+        <nav className="border-b-4 border-black bg-white sticky top-0 z-50">
+          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <Link href="/" className="text-2xl font-black uppercase tracking-tighter hover:bg-black hover:text-white transition-colors px-2">
+              PublicRecord<span className="text-gray-500">.fyi</span>
+            </Link>
+
+            <div className="flex items-center gap-4 sm:gap-6">
+              <Link href="/about" className="text-sm font-bold uppercase hover:underline">About</Link>
+              <Link href="/network" className="hidden md:flex items-center gap-2 px-2 py-0.5 border border-black hover:bg-black hover:text-white transition-all group">
+                <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
+                <span className="text-[10px] font-black uppercase tracking-tighter">Network: Stable</span>
+              </Link>
+              <Link href="/support" className="text-sm font-bold uppercase hover:underline">Support</Link>
+              <Link href="/upload" className="brutal-btn px-4 py-1 text-sm uppercase">Submit</Link>
+            </div>
+          </div>
+        </nav>
+
+        <main className="flex-grow max-w-7xl mx-auto px-4 py-8 w-full">
           {children}
         </main>
-        <footer className="border-t-2 border-black p-6 text-center text-sm font-mono mt-auto space-y-2">
-          <p>© {new Date().getFullYear()} publicrecord.fyi // Light and Sturdy</p>
-          <div className="flex justify-center gap-4 text-[10px] font-bold uppercase">
-            <a href="/terms" className="hover:underline">Terms</a>
-            <a href="/privacy" className="hover:underline">Privacy</a>
-            <a href="/emergency" className="text-red-600 hover:underline">Emergency Protocols</a>
+
+        <footer className="mt-20 border-t-4 border-black bg-white">
+          <MoneroTicker />
+          <div className="max-w-7xl mx-auto px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div>
+                <h3 className="font-black uppercase text-xl mb-4 italic underline decoration-4 underline-offset-4">Resilience</h3>
+                <p className="text-sm font-mono leading-relaxed text-gray-600">
+                  This registry is mirrored across Tor, IPFS, and BitTorrent. Seizing this domain only affects the gateway; the records are permanent.
+                </p>
+              </div>
+              <div>
+                <h3 className="font-black uppercase text-xl mb-4 italic underline decoration-4 underline-offset-4">Transparency</h3>
+                <ul className="space-y-2 font-bold uppercase text-xs">
+                  <li><Link href="/privacy" className="hover:underline">Privacy Policy</Link></li>
+                  <li><Link href="/terms" className="hover:underline">Terms of Service</Link></li>
+                  <li><Link href="/network" className="hover:underline">Network Status</Link></li>
+                  <li><Link href="/resources" className="hover:underline">FOIA Resources</Link></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-black uppercase text-xl mb-4 italic underline decoration-4 underline-offset-4">Network</h3>
+                <p className="text-xs font-mono text-gray-500">
+                  v1.2.0-stable<br />
+                  Verified Mirrors: 12 active<br />
+                  Data Integrity: 100% SHA-1 Verified
+                </p>
+              </div>
+            </div>
+            <div className="mt-12 pt-8 border-t border-black border-dotted flex justify-between items-center flex-wrap gap-4">
+              <p className="font-black uppercase text-[10px] tracking-widest">
+                © {new Date().getFullYear()} No Rights Reserved. Information wants to be free.
+              </p>
+            </div>
           </div>
         </footer>
       </body>

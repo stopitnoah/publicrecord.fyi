@@ -1,31 +1,6 @@
-import { supabase } from '@/lib/supabase';
-import { headers } from 'next/headers';
+import Link from 'next/link';
 
-export const revalidate = 60;
-
-async function getStats() {
-    // We can fetch the count of submissions
-    const { count } = await supabase
-        .from('submissions')
-        .select('*', { count: 'exact', head: true });
-
-    return {
-        submissions: count || 0,
-        canaryDate: new Date().toISOString().split('T')[0], // For now, dynamic to today for "freshness" or hardcoded if manual update preferred. 
-        // Real canary usually requires manual intervention to prove life. 
-        // Setting it to a fixed date to simulate a real canary that ages.
-        canaryTimestamp: "2025-12-29"
-    };
-}
-
-export default async function AboutPage() {
-    const stats = await getStats();
-    const canaryAgeDays = Math.floor((new Date().getTime() - new Date(stats.canaryTimestamp).getTime()) / (1000 * 3600 * 24));
-
-    let canaryColor = "bg-green-100 text-green-800 border-green-500";
-    if (canaryAgeDays > 7) canaryColor = "bg-yellow-100 text-yellow-800 border-yellow-500";
-    if (canaryAgeDays > 14) canaryColor = "bg-red-100 text-red-800 border-red-500";
-
+export default function AboutPage() {
     return (
         <div className="max-w-3xl mx-auto py-12 space-y-16">
 
@@ -38,17 +13,17 @@ export default async function AboutPage() {
 
             {/* The Problem */}
             <section className="space-y-6">
-                <h2 className="text-3xl font-black uppercase tracking-tight decoration-4">The Problem</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight">The Problem</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4">
                     <p>
-                        I've been online since I was 7 years old—far before I could comprehend or consent to what that meant.
-                        Every click, every search, every awkward moment of growing up: captured, stored, analyzed. My privacy has been effectively violated my entire life by surveillance systems I never agreed to and couldn't escape.
+                        I&apos;ve been online since I was 7 years old—far before I could comprehend or consent to what that meant.
+                        Every click, every search, every awkward moment of growing up: captured, stored, analyzed. My privacy has been effectively violated my entire life by surveillance systems I never agreed to and couldn&apos;t escape.
                     </p>
                     <p>
-                        Automatic License Plate Reader (ALPR) systems are just one piece of this apparatus. They photograph every license plate that passes by, creating a detailed map of everyone's movements. This data gets stored for months or years. It tracks where you go, when you go there, and who you're with.
+                        Automatic License Plate Reader (ALPR) systems are just one piece of this apparatus. They photograph every license plate that passes by, creating a detailed map of everyone&apos;s movements. This data gets stored for months or years. It tracks where you go, when you go there, and who you&apos;re with.
                     </p>
                     <p className="font-bold border-l-4 border-black pl-4 py-2 bg-gray-50">
-                        This surveillance doesn't make us safer. It makes us monitored.
+                        This surveillance doesn&apos;t make us safer. It makes us monitored.
                     </p>
                 </div>
             </section>
@@ -58,14 +33,19 @@ export default async function AboutPage() {
                 <h2 className="text-3xl font-black uppercase tracking-tight">The Response</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4">
                     <p>
-                        Public officials fund, control, and expand these surveillance systems. But here's the thing: they're tracked by the same systems.
+                        Public officials fund, control, and expand these surveillance systems. But here&apos;s the thing: they&apos;re tracked by the same systems.
                     </p>
                     <p>
                         ALPR data is a public record. Under Freedom of Information Act (FOIA) laws, this data is legally accessible to any citizen who requests it.
                     </p>
                     <p>
-                        publicrecord.fyi crowdsources and aggregates these public records. If a city council member votes to expand ALPR networks, their own movements become part of the public database. If a police chief oversees surveillance infrastructure, their vehicle's location history is a public record.
+                        publicrecord.fyi crowdsources and aggregates these public records. If a city council member votes to expand ALPR networks, their own movements become part of the public database. If a police chief oversees surveillance infrastructure, their vehicle&apos;s location history is a public record.
                     </p>
+                    <div className="pt-4">
+                        <Link href="/resources" className="brutal-btn uppercase tracking-widest text-sm">
+                            View FOIA Resources &amp; Legal Basis
+                        </Link>
+                    </div>
                 </div>
             </section>
 
@@ -74,45 +54,17 @@ export default async function AboutPage() {
                 <h2 className="text-3xl font-black uppercase tracking-tight">The Philosophy</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4">
                     <p>
-                        I'm not trying to hurt anyone. I'm trying to fix this.
+                        I&apos;m not trying to hurt anyone. I&apos;m trying to fix this.
                     </p>
                     <p>
                         The surveillance apparatus will never be dismantled while those in power are insulated from its effects. When officials experience the same loss of privacy they impose on citizens, the political calculus changes.
                     </p>
                     <p>
-                        This isn't about revenge or vindictiveness. It's about creating alignment. If surveillance is acceptable for innocent citizens, it's acceptable for public officials. If it's unacceptable for officials, it should be unacceptable for everyone.
+                        This isn&apos;t about revenge or vindictiveness. It&apos;s about creating alignment. If surveillance is acceptable for innocent citizens, it&apos;s acceptable for public officials. If it&apos;s unacceptable for officials, it should be unacceptable for everyone.
                     </p>
                     <p>
-                        Public records are public records. This site doesn't hack, leak, or steal anything. We simply aggregate what government agencies have already deemed public information.
+                        Public records are public records. This site doesn&apos;t hack, leak, or steal anything. We simply aggregate what government agencies have already deemed public information.
                     </p>
-                </div>
-            </section>
-
-            {/* How It Works */}
-            <section className="space-y-8 bg-black text-white p-8 brutal-shadow-white">
-                <h2 className="text-3xl font-black uppercase tracking-tight text-white border-b-2 border-white pb-2 inline-block">How It Works</h2>
-
-                <div className="grid md:grid-cols-2 gap-8">
-                    <div>
-                        <h3 className="font-bold uppercase mb-4 text-yellow-300">For Users</h3>
-                        <ul className="space-y-3 font-mono text-sm leading-relaxed">
-                            <li>→ Anyone can upload ALPR data or other public records obtained via FOIA</li>
-                            <li>→ All submissions are user-submitted and unverified (marked as "alleged")</li>
-                            <li>→ Community voting surfaces the most relevant submissions</li>
-                            <li>→ All data is preserved via BitTorrent, ensuring it can't be deleted</li>
-                        </ul>
-                    </div>
-                    <div>
-                        <h3 className="font-bold uppercase mb-4 text-yellow-300">Technical Architecture</h3>
-                        <ul className="space-y-3 font-mono text-sm leading-relaxed">
-                            <li>→ Primary hosting via Supabase (fast, reliable)</li>
-                            <li>→ Every file automatically creates a BitTorrent backup</li>
-                            <li>→ If this site is seized or taken down, it auto-switches to pure peer-to-peer mode</li>
-                            <li>→ Anyone can fork the code and redeploy in under 10 minutes</li>
-                            <li>→ Zero data loss, even if I disappear</li>
-                        </ul>
-                        <p className="mt-4 font-bold border-t border-white pt-4">This site is designed to survive its creator.</p>
-                    </div>
                 </div>
             </section>
 
@@ -128,14 +80,14 @@ export default async function AboutPage() {
                         <li>Dismantle the surveillance apparatus entirely</li>
                     </ol>
                     <p>
-                        When that happens, this site becomes obsolete. That's the goal. <br />
-                        Until then, if you're a public official who values privacy: fight to dismantle the surveillance state. That's the only way this stops.
+                        When that happens, this site becomes obsolete. That&apos;s the goal. <br />
+                        Until then, if you&apos;re a public official who values privacy: fight to dismantle the surveillance state. That&apos;s the only way this stops.
                     </p>
                 </div>
             </section>
 
             {/* What This Is Not */}
-            <section className="space-y-6 border-2 border-black p-6">
+            <section className="space-y-6 border-2 border-black p-6 brutal-shadow bg-red-50">
                 <h2 className="text-3xl font-black uppercase tracking-tight">What This Is Not</h2>
                 <ul className="space-y-4 font-medium">
                     <li className="flex gap-4">
@@ -157,49 +109,6 @@ export default async function AboutPage() {
                 </ul>
             </section>
 
-            {/* Legal Foundation */}
-            <section className="space-y-6 bg-yellow-100 border-4 border-black p-6 brutal-shadow">
-                <h2 className="text-3xl font-black uppercase tracking-tight flex items-center gap-2">
-                    <span>⚖️</span> Legal Foundation
-                </h2>
-                <div className="prose-lg font-medium leading-relaxed space-y-4">
-                    <p>On November 6, 2024, a Washington State Superior Court judge ruled:</p>
-                    <blockquote className="border-l-4 border-black pl-4 italic font-bold text-lg bg-white p-4">
-                        "Images generated by flock cameras are public records under Washington state law
-                        and they are not exempt from disclosure."
-                    </blockquote>
-                    <p><strong>Key findings:</strong></p>
-                    <ul className="list-disc list-inside space-y-1 ml-4">
-                        <li>ALPR data qualifies as public records</li>
-                        <li>Agencies cannot claim exemption</li>
-                        <li>Data doesn't need to be "possessed" by agency to be subject to disclosure</li>
-                    </ul>
-                    <p>This precedent supports citizen oversight of surveillance infrastructure.</p>
-                </div>
-            </section>
-
-            {/* Supporting Legal Action */}
-            <section className="space-y-6 border-2 border-black p-6">
-                <h2 className="text-3xl font-black uppercase tracking-tight">Supporting Legal Action</h2>
-                <div className="prose-lg font-medium leading-relaxed space-y-4">
-                    <p>
-                        The <strong>Institute for Justice</strong> is challenging mass ALPR surveillance in Norfolk, VA.
-                    </p>
-                    <p>
-                        Dr. John Padfield is writing a pro bono amicus brief analyzing deficiencies in ALPR policy manuals nationwide.
-                    </p>
-                    <p><strong>Your submissions help build the case:</strong></p>
-                    <ul className="list-disc list-inside space-y-1 ml-4">
-                        <li>Document lack of policies</li>
-                        <li>Show training gaps</li>
-                        <li>Expose unauthorized access</li>
-                    </ul>
-                    <a href="https://ij.org" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 underline font-bold">
-                        Learn About the Institute for Justice →
-                    </a>
-                </div>
-            </section>
-
             {/* Part of a Movement */}
             <section className="space-y-6 bg-black text-white p-8 brutal-shadow-white">
                 <h2 className="text-3xl font-black uppercase tracking-tight text-white border-b-2 border-white pb-2 inline-block">
@@ -208,101 +117,13 @@ export default async function AboutPage() {
                 <div className="prose-lg font-medium leading-relaxed space-y-4 text-gray-200">
                     <p>This project supports the growing movement for surveillance accountability:</p>
                     <ul className="space-y-2 font-mono text-sm">
-                        <li>→ Dr. John Padfield's <strong className="text-yellow-300">Brushfires of Freedom</strong> tour (12 events, 10 states)</li>
-                        <li>→ <strong className="text-yellow-300">DFlock's</strong> camera mapping initiative (80,000+ cameras documented)</li>
-                        <li>→ <strong className="text-yellow-300">Institute for Justice's</strong> legal challenges</li>
-                        <li>→ Thousands of citizens FOIAing ALPR data</li>
+                        <li>→ Dr. John Padfield&apos;s <strong className="text-yellow-300">Brushfires of Freedom</strong> tour</li>
+                        <li>→ <strong className="text-yellow-300">DFlock&apos;s</strong> camera mapping initiative</li>
+                        <li>→ <strong className="text-yellow-300">Institute for Justice&apos;s</strong> legal challenges</li>
                     </ul>
-                    <p className="font-bold border-t border-gray-700 pt-4 mt-4">
+                    <p className="font-bold border-t border-gray-700 pt-4 mt-4 text-xs font-mono uppercase tracking-widest">
                         We provide infrastructure. You provide accountability.
                     </p>
-                </div>
-            </section>
-
-            {/* How You Can Help / Transparency */}
-            <div className="grid md:grid-cols-2 gap-8">
-                <section className="space-y-6">
-                    <h2 className="text-3xl font-black uppercase tracking-tight">Transparency</h2>
-                    <div className="bg-gray-100 p-6 border-2 border-black font-mono text-sm space-y-4">
-                        <div>
-                            <h4 className="font-bold border-b border-black mb-2 uppercase">Funding Status</h4>
-                            <div className="flex justify-between">
-                                <span>Total donated:</span>
-                                <span className="font-bold">0.00 XMR</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Monthly costs:</span>
-                                <span>$25-50 + Legal Fund</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Current runway:</span>
-                                <span>Infinite (Self-funded)</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 className="font-bold border-b border-black mb-2 uppercase">System Status</h4>
-                            <div className="flex justify-between">
-                                <span>Total submissions:</span>
-                                <span className="font-bold">{stats.submissions}</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Active seeders:</span>
-                                <span>0</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Last canary:</span>
-                                <span>{stats.canaryTimestamp}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className={`p-4 border-2 ${canaryColor} font-mono text-xs`}>
-                        <p className="font-bold uppercase mb-1">Warrant Canary</p>
-                        <p>No government requests or legal demands received as of {stats.canaryTimestamp}.</p>
-                    </div>
-                </section>
-
-                <section className="space-y-6">
-                    <h2 className="text-3xl font-black uppercase tracking-tight">Support</h2>
-                    <div className="bg-yellow-50 p-6 border-2 border-black space-y-4">
-                        <p className="font-bold">This project runs on donations. Hosting, bandwidth, and legal defense all cost money. Because privacy matters, we only accept Monero.</p>
-
-                        <div className="space-y-1">
-                            <p className="text-xs font-mono uppercase font-bold text-gray-500">Monero Address (XMR)</p>
-                            <div className="bg-white border-2 border-black p-2 font-mono text-xs break-all select-all">
-                                488uLAQnFGvQ9LJMMqQzjRgVcvZVSRYgA2v7ZdiygQDmC6frLWwEzTj525puRSve8VDvBg8gdXF1V6woP6qhpm87FAaSoxY
-                            </div>
-                        </div>
-
-                        <div className="flex justify-center py-4 bg-white border-2 border-black">
-                            <img
-                                src="/Monero_QR_code.png"
-                                alt="Monero Donation QR Code"
-                                className="w-[300px] h-[300px] object-contain px-2"
-                            />
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            {/* Legal & Contact */}
-            <section className="grid md:grid-cols-2 gap-12 pt-8 border-t-4 border-black">
-                <div className="space-y-4 font-mono text-sm">
-                    <h3 className="font-bold uppercase mb-2">Legal</h3>
-                    <p>All data on this site is user-submitted and marked as alleged/unverified. We do not guarantee accuracy or availability.</p>
-                    <p>Public records are public. If you believe content violates the law, contact us.</p>
-                    <p>This project operates under First Amendment protections for transparency and journalism.</p>
-                </div>
-
-                <div className="space-y-4 font-mono text-sm">
-                    <h3 className="font-bold uppercase mb-2">Contact</h3>
-                    <ul className="space-y-2">
-                        <li><span className="opacity-50 w-24 inline-block">General:</span> <a href="mailto:contact@publicrecord.fyi" className="underline">contact@publicrecord.fyi</a></li>
-                        <li><span className="opacity-50 w-24 inline-block">Legal/DMCA:</span> <a href="mailto:legal@publicrecord.fyi" className="underline">legal@publicrecord.fyi</a></li>
-                        <li><span className="opacity-50 w-24 inline-block">Press:</span> <a href="mailto:press@publicrecord.fyi" className="underline">press@publicrecord.fyi</a></li>
-                        <li><span className="opacity-50 w-24 inline-block">Secure:</span> [PGP key fingerprint]</li>
-                    </ul>
                 </div>
             </section>
 
@@ -314,27 +135,23 @@ export default async function AboutPage() {
                 <h2 className="text-3xl font-black uppercase tracking-tight text-white">A Personal Note</h2>
                 <div className="prose-lg font-medium leading-relaxed space-y-4 text-gray-200">
                     <p>
-                        I don't do this because I'm paranoid. I do this because I've lived under surveillance my entire life, and I refuse to make it easy for them.
+                        I don&apos;t do this because I&apos;m paranoid. I do this because I&apos;ve lived under surveillance my entire life, and I refuse to make it easy for them.
                     </p>
                     <p>
-                        Building this site isn't an act of aggression. It's an act of self-defense and collective liberation.
+                        Building this site isn&apos;t an act of aggression. It&apos;s an act of self-defense and collective liberation.
                     </p>
                     <p className="text-white font-bold border-l-4 border-white pl-4">
-                        If you've also had enough of being watched, tracked, and catalogued without your consent: you're not alone. Let's fix this together.
+                        If you&apos;ve also had enough of being watched, tracked, and catalogued without your consent: you&apos;re not alone. Let&apos;s fix this together.
                     </p>
-                </div>
-
-                <div className="pt-8 mt-8 border-t border-gray-800 text-center space-y-2 font-serif italic text-lg opacity-80">
-                    <p>"Those who would give up essential Liberty, to purchase a little temporary Safety, deserve neither Liberty nor Safety." – Benjamin Franklin</p>
-                    <p>"Privacy is not about hiding. Privacy is about freedom." – Anonymous</p>
                 </div>
             </section>
 
             <div className="text-center font-mono text-xs opacity-50 space-y-1 pb-12">
-                <p>Latest database backup: [magnet link updates weekly]</p>
-                <p>Tor mirror: [.onion address when available]</p>
-                <p>IPFS hash: [hash when available]</p>
-                <p className="font-bold mt-2">This site will outlive its creator. That's by design.</p>
+                <p>This site is designed to survive its creator. That&apos;s by design.</p>
+                <div className="flex justify-center gap-4 mt-4 underline">
+                    <Link href="/network">Network Status</Link>
+                    <Link href="/support">Support the Mission</Link>
+                </div>
             </div>
 
         </div>

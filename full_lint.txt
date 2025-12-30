@@ -1,0 +1,76 @@
+
+> app@0.1.0 lint
+> eslint
+
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\actions\submit-record.ts
+  52:14  warning  'e' is defined but never used                    @typescript-eslint/no-unused-vars
+  94:19  warning  'uploadData' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\components\feed.tsx
+  191:41  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\components\qr-code.tsx
+  8:13  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\components\view-helpers.tsx
+   6:12  warning  'copiedLink' is assigned a value but never used    @typescript-eslint/no-unused-vars
+   7:12  warning  'copiedMagnet' is assigned a value but never used  @typescript-eslint/no-unused-vars
+   9:11  warning  'copyLink' is assigned a value but never used      @typescript-eslint/no-unused-vars
+  16:11  warning  'copyMagnet' is assigned a value but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\page.tsx
+  35:21   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  36:173  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  56:38   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  59:37   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  62:21   error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  62:44   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  62:77   error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  62:168  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\state\[state]\page.tsx
+  4:10  warning  'notFound' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\terms\page.tsx
+  20:106  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  20:112  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\upload\form.tsx
+   16:5   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              @typescript-eslint/ban-ts-comment
+   27:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\upload\form.tsx:27:13
+  25 |         if (state.message && !state.success && captchaRef.current) {
+  26 |             captchaRef.current.resetCaptcha();
+> 27 |             setCaptchaToken(null);
+     |             ^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  28 |         }
+  29 |         if (state.success && state.errors?.redirectId) {
+  30 |             // Success! Wait a bit then redirect  react-hooks/set-state-in-effect
+  104:25  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react/no-unescaped-entities
+  104:40  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react/no-unescaped-entities
+  106:94  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  react/no-unescaped-entities
+  195:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @next/next/no-img-element
+
+C:\Users\noahf\Desktop\publicrecord.fyi\app\view\[id]\page.tsx
+   57:18  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  118:33  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+  138:83  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+
+C:\Users\noahf\Desktop\publicrecord.fyi\lib\supabase.ts
+   2:10  warning  'Database' is defined but never used                                                                                 @typescript-eslint/no-unused-vars
+  11:1   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\noahf\Desktop\publicrecord.fyi\scripts\eject.ts
+  14:9   error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+  15:53  error  Unexpected any. Specify a different type                                                                             @typescript-eslint/no-explicit-any
+
+Γ£û 32 problems (20 errors, 12 warnings)
+

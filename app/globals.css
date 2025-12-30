@@ -26,6 +26,23 @@ body {
     box-shadow: 4px 4px 0px 0px #000000;
   }
 
+  @media (max-width: 640px) {
+    .brutal-shadow {
+      box-shadow: 2px 2px 0px 0px #000000;
+    }
+
+    h1 {
+      font-size: 2.25rem !important;
+      /* text-4xl equivalent but forced */
+      line-height: 1 !important;
+    }
+
+    .brutal-btn {
+      @apply w-full text-center;
+      box-shadow: 3px 3px 0px 0px #000000 !important;
+    }
+  }
+
   .brutal-btn {
     @apply px-4 py-2 bg-white text-black border-2 border-black font-bold transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none hover:bg-gray-50;
     box-shadow: 4px 4px 0px 0px #000000;

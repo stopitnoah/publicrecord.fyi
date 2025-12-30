@@ -7,7 +7,9 @@ export async function fetchSubmissions(
     search?: string,
     state?: string,
     category?: string,
-    sort: 'newest' | 'top' = 'newest'
+    sort: 'newest' | 'top' = 'newest',
+    startDate?: string,
+    endDate?: string
 ) {
     try {
         let query = supabase
@@ -24,6 +26,14 @@ export async function fetchSubmissions(
 
         if (search && search !== '') {
             query = query.or(`official_name.ilike.%${search}%,title.ilike.%${search}%,description.ilike.%${search}%,extracted_text.ilike.%${search}%`);
+        }
+
+        if (startDate && startDate !== '') {
+            query = query.gte('date', startDate);
+        }
+
+        if (endDate && endDate !== '') {
+            query = query.lte('date', endDate);
         }
 
         if (sort === 'top') {
